@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+:root {
+  --color-cream: #f7f5f0;
+  --color-cream-dark: #efeae2;
+  --color-ink: #121110;
+  --color-muted: #5f5c56;
+  --color-border: #e4dfd4;
+  /* Forest — brand */
+  --color-brand: #1a3c2f;
+  --color-brand-mid: #234d3d;
+  --color-brand-hover: #143228;
+  /* Warm metal accent */
+  --color-gold: #a67c52;
+  --color-gold-hover: #8f6844;
+  --color-gold-soft: color-mix(in oklab, #a67c52 14%, var(--color-cream));
+  /* Bright amber — hero headline accent + primary buttons */
+  --color-amber: #e0a82e;
+  --color-amber-hover: #c8941f;
+  --color-night: #0c1612;
+  --color-night-soft: #15231d;
+}
+
+@theme inline {
+  --color-background: var(--color-cream);
+  --color-foreground: var(--color-ink);
+  --font-sans: var(--font-family-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+}
+
+body {
+  background: var(--color-night);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-brand) 18%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+/* --- Flipbook (StPageFlip) base styles --- */
+.stf__parent {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  transform: translateZ(0);
+  touch-action: pan-y;
+}
+.sft__wrapper {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+.stf__parent canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+.stf__block {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  perspective: 2000px;
+}
+.stf__item {
+  display: none;
+  position: absolute;
+  transform-style: preserve-3d;
+}
+.stf__outerShadow,
+.stf__innerShadow,
+.stf__hardShadow,
+.stf__hardInnerShadow {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* Flipbook page surface — the premium "paper". */
+.cf-page {
+  position: relative;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  overflow: hidden;
+  box-sizing: border-box;
+  /* subtle paper sheen */
+  background-image: radial-gradient(
+    120% 100% at 50% 0%,
+    #fffdf8 0%,
+    var(--color-cream) 55%
+  );
+}
+.cf-page.cf-dark {
+  background: var(--color-night);
+  color: #fff;
+  background-image: none;
+}
+
+@keyframes cfHintPulse {
+  0%, 100% { transform: translateX(0); opacity: 0.55; }
+  50%      { transform: translateX(4px); opacity: 1; }
+}
+.cf-hint-arrow {
+  animation: cfHintPulse 1.6s ease-in-out infinite;
+}
