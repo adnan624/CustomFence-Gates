@@ -38,4 +38,3 @@ npm start
 This project is a copy, not a shared package. When the catalogue changes in the
 main `thebackyardfence` site, copy over `src/config/catalogue.ts` and any new
 images it references in `public/`.
-# CustomFence-Gates

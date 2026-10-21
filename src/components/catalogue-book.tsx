@@ -50,6 +50,7 @@ export function CatalogueBook() {
   const [page, setPage] = useState(0);
   const [total, setTotal] = useState(0);
   const [size, setSize] = useState<PageSize>(computePageSize);
+  
 
   const { pages, chapters } = useMemo(() => buildBookPages(), []);
 

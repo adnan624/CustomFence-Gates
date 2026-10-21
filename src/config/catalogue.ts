@@ -7,16 +7,6 @@
  */
 import type { ServiceSlug } from "@/config/services";
 
-/** Known-good Unsplash imagery (hosts are allow-listed in next.config.ts). */
-const U = {
-  fenceLine:
-    "https://images.unsplash.com/photo-1757673747333-ebd0b68ef400?q=80&w=1400&auto=format&fit=crop",
-  picket:
-    "https://images.unsplash.com/photo-1647539211130-9daca4990c41?q=80&w=1400&auto=format&fit=crop",
-  horizontalSlat:
-    "https://images.unsplash.com/photo-1748908271592-d9d5690b288b?q=80&w=1400&auto=format&fit=crop",
-} as const;
-
 export type Swatch = { name: string; hex: string };
 
 export type CatalogueStyle = {
@@ -60,27 +50,51 @@ export const CATALOGUE: CatalogueCategory[] = [
     ],
     styles: [
       {
-        name: "Classic Privacy",
+        name: "Classic Cedar Fence",
         blurb:
-          "The signature full-privacy fence — tight pickets, clean cap, and posts set to stand straight for years.",
+          "The signature full-privacy fence — tight vertical boards, a clean top cap, and posts set to stand straight for years.",
         image: {
-          src: "/service-cedar-fence.jpg",
-          alt: "Classic cedar privacy fence with dog-ear pickets",
+          src: "/cedar-classic.jpg",
+          alt: "Classic cedar privacy fence with capped posts beside a landscaped border",
         },
         specs: [
-          "Dog-ear or flat-top pickets",
+          "Vertical board privacy",
           "6 ft standard height",
           "Posts set in concrete",
         ],
         tag: "Most requested",
       },
       {
-        name: "Horizontal Slat",
+        name: "Solid Top Cedar Fence",
+        blurb:
+          "Full-height privacy finished with a continuous solid top rail for a crisp, uninterrupted line.",
+        image: {
+          src: "/cedar-solid-top.jpg",
+          alt: "Solid-top cedar privacy fence running along a garden path",
+        },
+        specs: [
+          "Continuous solid top rail",
+          "Full privacy face",
+          "Capped posts",
+        ],
+      },
+      {
+        name: "Lattice Top Cedar Fence",
+        blurb:
+          "Full privacy below, a decorative lattice crown above — height and character without visual weight.",
+        image: {
+          src: "/cedar-lattice-top.jpg",
+          alt: "Cedar privacy fence with a decorative lattice top and garden beds",
+        },
+        specs: ["Decorative lattice crown", "Garden-friendly", "Added height"],
+      },
+      {
+        name: "Horizontal Slat Cedar Fence",
         blurb:
           "A modern, architectural line of horizontal boards with concealed fasteners for an uninterrupted face.",
         image: {
-          src: U.horizontalSlat,
-          alt: "Freshly built horizontal timber slat fence with green landscaping",
+          src: "/cedar-horizontal-slat.jpg",
+          alt: "Modern horizontal slat cedar fence with landscape lighting at dusk",
         },
         specs: [
           "1×6 horizontal slats",
@@ -89,27 +103,45 @@ export const CATALOGUE: CatalogueCategory[] = [
         ],
       },
       {
-        name: "Lattice Top",
-        blurb:
-          "Full privacy below, a decorative lattice crown above — height and character without visual weight.",
-        image: {
-          src: "/gallery2-after.png",
-          alt: "Cedar privacy fence with a decorative lattice top and garden beds",
-        },
-        specs: ["Decorative lattice crown", "Garden-friendly", "Added height"],
-      },
-      {
-        name: "Good-Neighbour Shadowbox",
+        name: "Shadow Box Cedar Fence",
         blurb:
           "Alternating boards finish the fence identically on both sides and let a little air and light through.",
         image: {
-          src: "/gallery1-after-fence.jpg",
-          alt: "New cedar shadowbox-style privacy fence along a backyard",
+          src: "/cedar-shadowbox.jpg",
+          alt: "Cedar shadow box fence finished the same on both sides",
         },
         specs: [
           "Finished both sides",
           "Alternating boards",
           "Shared-boundary favourite",
+        ],
+      },
+      {
+        name: "Hog Wire Cedar Fence",
+        blurb:
+          "A cedar frame around welded hog-wire panels — an open, contemporary boundary that keeps the view.",
+        image: {
+          src: "/cedar-hog-wire.jpg",
+          alt: "Cedar-framed hog wire fence bordering a lawn with a lake view",
+        },
+        specs: [
+          "Welded hog-wire panels",
+          "Cedar post-and-rail frame",
+          "Open sightlines",
+        ],
+      },
+      {
+        name: "Cedar Picket Fence",
+        blurb:
+          "A classic front-yard picket in warm cedar — spaced boards scaled for gardens and curb appeal.",
+        image: {
+          src: "/cedar-picket.jpg",
+          alt: "Warm cedar picket fence along a front-yard garden border",
+        },
+        specs: [
+          "Spaced picket boards",
+          "Garden & front-yard scale",
+          "Capped posts",
         ],
       },
     ],
@@ -147,35 +179,65 @@ export const CATALOGUE: CatalogueCategory[] = [
     ],
     styles: [
       {
-        name: "Solid Privacy",
+        name: "Privacy Vinyl Fence",
         blurb:
           "Tongue-and-groove panels with no gaps — a seamless, bright-white wall of privacy.",
         image: {
-          src: "/service-vinyl.jpg",
-          alt: "Solid white vinyl privacy fence",
+          src: "/vinyl-privacy.jpg",
+          alt: "Solid white vinyl privacy fence beside a landscaped lawn",
         },
         specs: ["Tongue-and-groove panels", "Full privacy", "6 ft standard"],
         tag: "Zero maintenance",
       },
       {
-        name: "Picket & Scallop",
+        name: "Lattice Top Vinyl Fence",
         blurb:
-          "Classic or scalloped pickets scaled for front yards and garden borders, in fade-resistant white.",
+          "Full privacy below with a decorative lattice crown above — added height and softness without the upkeep.",
         image: {
-          src: U.picket,
-          alt: "White picket fence with garden greenery",
+          src: "/vinyl-lattice-top.jpg",
+          alt: "Vinyl privacy fence with a decorative lattice top and garden beds at dusk",
         },
-        specs: ["Straight or scalloped top", "Garden scale", "Fade-resistant"],
+        specs: ["Decorative lattice crown", "Added height", "Garden-friendly"],
       },
       {
-        name: "Contemporary Black",
+        name: "Vinyl Picket Fence",
         blurb:
-          "A matte black co-extrusion for modern elevations that want contrast, not glare.",
+          "Classic pickets scaled for front yards and garden borders, in fade-resistant white.",
         image: {
-          src: "/gallery3-after-fence.jpg",
-          alt: "Modern black vinyl privacy fence with fresh landscaping",
+          src: "/vinyl-picket.jpg",
+          alt: "White vinyl picket fence along a front-yard garden",
         },
-        specs: ["Matte black finish", "UV-stable colour", "Modern profile"],
+        specs: ["Straight picket top", "Garden scale", "Fade-resistant"],
+      },
+      {
+        name: "Shadow Box Vinyl Fence",
+        blurb:
+          "Alternating boards finish the fence the same on both sides and let air and light filter through.",
+        image: {
+          src: "/vinyl-shadowbox.jpg",
+          alt: "White vinyl shadow box fence finished the same on both sides",
+        },
+        specs: ["Finished both sides", "Alternating boards", "Semi-private"],
+      },
+      {
+        name: "Vinyl Ranch Rail Fence",
+        blurb:
+          "Open two- or three-rail vinyl for property lines and paddocks — a clean boundary that keeps the view.",
+        image: {
+          src: "/vinyl-ranch-rail.jpg",
+          alt: "White vinyl ranch rail fence running along a green lawn",
+        },
+        specs: ["2 – 3 open rails", "Property-line scale", "Open sightlines"],
+      },
+      {
+        name: "Horizontal Vinyl Fence",
+        blurb:
+          "A modern, architectural line of horizontal rails for contemporary elevations — no painting, ever.",
+        image: {
+          src: "/vinyl-horizontal.jpg",
+          alt: "Modern horizontal vinyl fence with landscape lighting at dusk",
+        },
+        specs: ["Horizontal rails", "Modern profile", "Rinse-clean upkeep"],
       },
     ],
     finishes: {
@@ -211,25 +273,25 @@ export const CATALOGUE: CatalogueCategory[] = [
     ],
     styles: [
       {
-        name: "Galvanized Classic",
+        name: "Chain Link Fence",
         blurb:
-          "The workhorse — galvanized mesh and framework that shrug off weather for decades with almost no upkeep.",
+          "The workhorse — galvanized or black-coated mesh and framework that shrug off weather for decades with almost no upkeep.",
         image: {
-          src: "/service-chain-link.jpg",
-          alt: "Galvanized chain-link fence line",
+          src: "/chain-link-classic.jpg",
+          alt: "Black-coated chain-link fence line along a landscaped backyard",
         },
-        specs: ["9 – 11.5 gauge mesh", "Galvanized framework", "Low maintenance"],
+        specs: ["9 – 11.5 gauge mesh", "Galvanized or coated framework", "Low maintenance"],
         tag: "Best value",
       },
       {
-        name: "Black Vinyl-Coated",
+        name: "Chain Link Fence with Privacy Slats",
         blurb:
-          "A powder-black coating that lets the fence recede into the landscape — ideal around views, pools, and pets.",
+          "Woven slats drop into the mesh to add privacy and screening while keeping the fence's hard-working frame.",
         image: {
-          src: U.fenceLine,
-          alt: "Dark-coated fence line disappearing into a grassy field",
+          src: "/chain-link-privacy-slats.jpg",
+          alt: "Black chain-link fence filled with privacy slats beside a garden bed",
         },
-        specs: ["PVC-coated mesh", "Low-profile look", "Pet & pool friendly"],
+        specs: ["Woven privacy slats", "Added screening", "Pet & yard friendly"],
       },
     ],
     finishes: {
@@ -264,21 +326,25 @@ export const CATALOGUE: CatalogueCategory[] = [
     ],
     styles: [
       {
-        name: "Estate Picket",
+        name: "Classic Aluminium Fence",
         blurb:
-          "Slim flush-top or spear-top pickets, powder-coated and rackable to follow a sloping yard cleanly.",
+          "Slim flush-top pickets, powder-coated and rackable to follow a sloping yard cleanly.",
         image: {
-          src: "/service-aluminum.jpg",
-          alt: "Black aluminum estate picket fence",
+          src: "/aluminum-classic.jpg",
+          alt: "Black aluminium fence with flush-top pickets beside a landscaped lawn",
         },
-        specs: ["Flush or spear-top", "Rackable for slopes", "Powder-coated"],
+        specs: ["Flush-top pickets", "Rackable for slopes", "Powder-coated"],
         tag: "Pool-code ready",
       },
       {
-        name: "Made to Order",
+        name: "Spear Top Aluminium Fence",
         blurb:
-          "Custom heights, picket spacing, decorative finials, and matching self-closing gates — specified to your property.",
-        specs: ["Custom heights & spacing", "Decorative finials", "Matching gates"],
+          "Pointed spear-top pickets with decorative finials — the elegance of wrought iron, with none of the rust.",
+        image: {
+          src: "/aluminum-spear-top.jpg",
+          alt: "Black aluminium spear-top fence with decorative finials along a garden border",
+        },
+        specs: ["Spear-top pickets", "Decorative finials", "Powder-coated"],
       },
     ],
     finishes: {
