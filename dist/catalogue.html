@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Custom Fence &amp; Gates — The Catalogue</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html { font-family: "Helvetica Neue", Arial, sans-serif; color: #121110; }
+  h1,h2,h3 { font-family: Georgia, "Times New Roman", serif; letter-spacing: -0.01em; }
+
+  .page { position: relative; width: 210mm; height: 297mm; overflow: hidden; page-break-after: always; background: #f7f5f0; }
+  .page:last-child { page-break-after: auto; }
+  .pad { position: relative; display: flex; flex-direction: column; height: 100%; padding: 22mm 20mm; }
+  .light { background: linear-gradient(170deg, #fff, #f7f5f0 60%, #efeae2); }
+
+  .eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.28em; }
+  .gold { color: #a67c52; }
+
+  .footer { margin-top: auto; display: flex; justify-content: space-between; padding-top: 10mm;
+    font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: #5f5c56; }
+
+  /* Cover */
+  .cover, .chapter { background-size: cover; background-position: center; color: #fff; }
+  .cover-scrim { position: absolute; inset: 0; background: linear-gradient(to top, #0c1612, #0c1612cc 45%, #0c161259); }
+  .cover-inner { position: relative; display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: 24mm 20mm; }
+  .cover-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .cover-brand { font-family: Georgia, serif; font-size: 22px; font-weight: 700; }
+  .cover-sub { margin-top: 4px; font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; color: #ffffffaa; }
+  .cover-count { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.25em; color: #a67c52; }
+  .cover-title h1 { margin-top: 10px; font-size: 54px; font-weight: 700; line-height: 1.02; }
+  .cover-lede { margin-top: 14px; max-width: 46ch; font-size: 13px; line-height: 1.7; color: #ffffffdd; }
+  .cover-foot { font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; color: #ffffffaa; }
+
+  /* Contents */
+  .h-contents { margin-top: 8px; font-size: 32px; font-weight: 700; }
+  .toc { list-style: none; margin-top: 10mm; }
+  .toc li { display: flex; align-items: center; gap: 14px; padding: 7px 0; }
+  .toc-num { width: 34px; font-family: "Arial Black", Arial, sans-serif; font-size: 22px; color: #a67c52; }
+  .toc-rule { width: 20px; height: 1px; background: #a67c5299; flex: none; }
+  .toc-body { flex: 1; }
+  .toc-title { display: block; font-family: Georgia, serif; font-size: 16px; font-weight: 700; }
+  .toc-eyebrow { display: block; font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: #5f5c56; }
+
+  /* Chapter opener */
+  .chapter-scrim { position: absolute; inset: 0; background: linear-gradient(to top, #0c1612, #0c1612b3 40%, #0c161240); }
+  .chapter-inner { position: relative; display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: 24mm 20mm; }
+  .chapter-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .chapter-big { font-family: "Arial Black", Arial, sans-serif; font-size: 72px; line-height: 1; color: #ffffff40; }
+  .chapter-title { margin-top: 10px; font-size: 44px; font-weight: 700; line-height: 1.05; }
+  .chapter-lede { margin-top: 14px; max-width: 54ch; font-size: 13px; line-height: 1.7; color: #ffffffdd; }
+  .meta-row { margin-top: 20px; display: flex; gap: 40px; border-top: 1px solid #ffffff33; padding-top: 14px; }
+  .meta-label { font-size: 8px; text-transform: uppercase; letter-spacing: 0.15em; color: #ffffff99; }
+  .meta-value { margin-top: 5px; font-size: 14px; font-weight: 700; }
+  .chapter-foot { font-size: 8px; text-transform: uppercase; letter-spacing: 0.2em; color: #ffffff99; }
+
+  /* Style page */
+  .style-head { display: flex; align-items: center; gap: 12px; }
+  .style-num { font-family: "Arial Black", Arial, sans-serif; font-size: 30px; color: #a67c52; }
+  .style-rule { flex: 1; height: 1px; background: #e4dfd4; }
+  .tag { border-radius: 999px; background: #0c1612; color: #fff; padding: 5px 11px; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+  .style-name { margin-top: 12px; font-size: 28px; font-weight: 700; }
+  .style-img { margin-top: 14px; height: 105mm; width: 100%; border-radius: 14px; background-size: cover; background-position: center; border: 1px solid #e4dfd4; }
+  .style-img.placeholder { display: flex; align-items: center; justify-content: center; background: #1a3c2f; }
+  .style-img.placeholder span { font-family: "Arial Black", Arial, sans-serif; font-size: 72px; color: #ffffff33; }
+  .style-blurb { margin-top: 16px; font-size: 13px; line-height: 1.7; color: #5f5c56; }
+  .chips { list-style: none; margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips li { display: inline-flex; align-items: center; gap: 7px; border-radius: 999px; background: #ffffffb3; border: 1px solid #e4dfd4; padding: 6px 12px; font-size: 11px; font-weight: 500; }
+  .chips li::before { content: ""; width: 5px; height: 5px; border-radius: 999px; background: #a67c52; }
+
+  /* Specs page */
+  .finishes-title { margin-top: 8px; font-size: 24px; font-weight: 700; }
+  .swatches { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 22px; }
+  .swatch { display: flex; flex-direction: column; align-items: center; gap: 7px; }
+  .swatch .dot { width: 46px; height: 46px; border-radius: 999px; border: 1px solid #0000001a; box-shadow: inset 0 2px 6px #00000026; }
+  .swatch span { font-size: 10px; color: #5f5c56; }
+  .specs { margin-top: 22px; border-top: 1px solid #e4dfd4; }
+  .spec-row { display: flex; align-items: baseline; gap: 16px; border-bottom: 1px solid #e4dfd4; padding: 10px 0; }
+  .spec-row dt { width: 110px; flex: none; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #5f5c56; }
+  .spec-row dd { font-size: 13px; color: #121110; }
+
+  /* Back cover */
+  .back { background: #0c1612; color: #fff; }
+  .back-inner { justify-content: space-between; }
+  .back-title { font-size: 34px; font-weight: 700; line-height: 1.1; }
+  .back-lede { margin-top: 14px; max-width: 48ch; font-size: 13px; line-height: 1.7; color: #ffffffbf; }
+  .back-contact { margin-top: 26px; display: flex; flex-direction: column; gap: 16px; }
+  .back-label { font-size: 8px; text-transform: uppercase; letter-spacing: 0.2em; color: #ffffff80; }
+  .back-value { margin-top: 3px; font-size: 18px; font-weight: 700; color: #e0a82e; }
+  .back-foot { font-size: 8px; text-transform: uppercase; letter-spacing: 0.2em; color: #ffffff99; }
+</style></head>
+<body>
+  <section class="page cover" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/service-cedar-fence.jpg')">
+    <div class="cover-scrim"></div>
+    <div class="cover-inner">
+      <header class="cover-top">
+        <div>
+          <p class="cover-brand">Custom Fence &amp; Gates</p>
+          <p class="cover-sub">King County · Pierce County</p>
+        </div>
+        <p class="cover-count">07 Collections</p>
+      </header>
+      <div class="cover-title">
+        <p class="eyebrow gold">The Catalogue</p>
+        <h1>Fence &amp; gate collections.</h1>
+        <p class="cover-lede">Cedar, vinyl, composite, chain-link, aluminum, repairs, and custom
+          gates — 7 collections of styles, finishes, and specifications.</p>
+      </div>
+      <p class="cover-foot">0400 000 000 · Free, no-obligation estimates</p>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <p class="eyebrow gold">Contents</p>
+      <h2 class="h-contents">The collections</h2>
+      <ol class="toc">
+      <li>
+        <span class="toc-num">01</span>
+        <span class="toc-rule"></span>
+        <span class="toc-body">
+          <span class="toc-title">Cedar fences</span>
+          <span class="toc-eyebrow">Collection 01 — Western Red Cedar</span>
+        </span>
+      </li>
+      <li>
+        <span class="toc-num">02</span>
+        <span class="toc-rule"></span>
+        <span class="toc-body">
+          <span class="toc-title">Vinyl fences</span>
+          <span class="toc-eyebrow">Collection 02 — Vinyl</span>
+        </span>
+      </li>
+      <li>
+        <span class="toc-num">03</span>
+        <span class="toc-rule"></span>
+        <span class="toc-body">
+          <span class="toc-title">Composite fences</span>
+          <span class="toc-eyebrow">Collection 03 — Composite</span>
+        </span>
+      </li>
+      <li>
+        <span class="toc-num">04</span>
+        <span class="toc-rule"></span>
+        <span class="toc-body">
+          <span class="toc-title">Chain-link fences</span>
+          <span class="toc-eyebrow">Collection 04 — Chain-Link</span>
+        </span>
+      </li>
+      <li>
+        <span class="toc-num">05</span>
+        <span class="toc-rule"></span>
+        <span class="toc-body">
+          <span class="toc-title">Aluminum fences</span>
+          <span class="toc-eyebrow">Collection 05 — Aluminum</span>
+        </span>
+      </li>
+      <li>
+        <span class="toc-num">06</span>
+        <span class="toc-rule"></span>
+        <span class="toc-body">
+          <span class="toc-title">Fence repair</span>
+          <span class="toc-eyebrow">Collection 06 — Repair &amp; Restore</span>
+        </span>
+      </li>
+      <li>
+        <span class="toc-num">07</span>
+        <span class="toc-rule"></span>
+        <span class="toc-body">
+          <span class="toc-title">Custom gates</span>
+          <span class="toc-eyebrow">Collection 07 — Custom Gates</span>
+        </span>
+      </li></ol>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Contents</span></div>
+    </div>
+  </section>
+
+  <section class="page chapter" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/service-cedar-fence.jpg')">
+    <div class="chapter-scrim"></div>
+    <div class="chapter-inner">
+      <header class="chapter-top">
+        <p class="eyebrow gold">Chapter 01</p>
+        <span class="chapter-big">01</span>
+      </header>
+      <div>
+        <p class="eyebrow gold">Collection 01 — Western Red Cedar</p>
+        <h2 class="chapter-title">Cedar fences</h2>
+        <p class="chapter-lede">Warm, natural, and unmistakably Pacific Northwest. Every cedar fence is milled, built, and finished to order — the grain, the height, and the line chosen for your yard.</p>
+        <div class="meta-row"><div class="meta-cell"><p class="meta-label">Material</p><p class="meta-value">Western Red Cedar</p></div><div class="meta-cell"><p class="meta-label">Heights</p><p class="meta-value">4 – 8 ft</p></div><div class="meta-cell"><p class="meta-label">Build</p><p class="meta-value">Made to order</p></div></div>
+      </div>
+      <p class="chapter-foot">Custom Fence &amp; Gates</p>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">01</span>
+        <span class="style-rule"></span>
+        <span class="tag">Most requested</span>
+      </div>
+      <h3 class="style-name">Classic Cedar Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/cedar-classic.jpg')"></div>
+      <p class="style-blurb">The signature full-privacy fence — tight vertical boards, a clean top cap, and posts set to stand straight for years.</p>
+      <ul class="chips"><li>Vertical board privacy</li><li>6 ft standard height</li><li>Posts set in concrete</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 01 — Western Red Cedar</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">02</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Solid Top Cedar Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/cedar-solid-top.jpg')"></div>
+      <p class="style-blurb">Full-height privacy finished with a continuous solid top rail for a crisp, uninterrupted line.</p>
+      <ul class="chips"><li>Continuous solid top rail</li><li>Full privacy face</li><li>Capped posts</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 01 — Western Red Cedar</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">03</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Lattice Top Cedar Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/cedar-lattice-top.jpg')"></div>
+      <p class="style-blurb">Full privacy below, a decorative lattice crown above — height and character without visual weight.</p>
+      <ul class="chips"><li>Decorative lattice crown</li><li>Garden-friendly</li><li>Added height</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 01 — Western Red Cedar</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">04</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Horizontal Slat Cedar Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/cedar-horizontal-slat.jpg')"></div>
+      <p class="style-blurb">A modern, architectural line of horizontal boards with concealed fasteners for an uninterrupted face.</p>
+      <ul class="chips"><li>1×6 horizontal slats</li><li>Concealed fasteners</li><li>Cedar or powder-coated posts</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 01 — Western Red Cedar</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">05</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Shadow Box Cedar Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/cedar-shadowbox.jpg')"></div>
+      <p class="style-blurb">Alternating boards finish the fence identically on both sides and let a little air and light through.</p>
+      <ul class="chips"><li>Finished both sides</li><li>Alternating boards</li><li>Shared-boundary favourite</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 01 — Western Red Cedar</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">06</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Hog Wire Cedar Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/cedar-hog-wire.jpg')"></div>
+      <p class="style-blurb">A cedar frame around welded hog-wire panels — an open, contemporary boundary that keeps the view.</p>
+      <ul class="chips"><li>Welded hog-wire panels</li><li>Cedar post-and-rail frame</li><li>Open sightlines</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 01 — Western Red Cedar</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">07</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Cedar Picket Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/cedar-picket.jpg')"></div>
+      <p class="style-blurb">A classic front-yard picket in warm cedar — spaced boards scaled for gardens and curb appeal.</p>
+      <ul class="chips"><li>Spaced picket boards</li><li>Garden &amp; front-yard scale</li><li>Capped posts</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 01 — Western Red Cedar</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <p class="eyebrow gold">Finishes &amp; specifications</p>
+      <h3 class="finishes-title">Cedar finishes</h3>
+      <div class="swatches"><div class="swatch"><span class="dot" style="background:#c89b6a"></span><span>Natural</span></div><div class="swatch"><span class="dot" style="background:#b9793f"></span><span>Honey</span></div><div class="swatch"><span class="dot" style="background:#8a4b2a"></span><span>Cedartone</span></div><div class="swatch"><span class="dot" style="background:#8d8a84"></span><span>Driftwood</span></div><div class="swatch"><span class="dot" style="background:#2a2622"></span><span>Ebony</span></div></div>
+      <dl class="specs"><div class="spec-row"><dt>Posts</dt><dd>4×4 pressure-treated, set in concrete</dd></div><div class="spec-row"><dt>Rails</dt><dd>2×4 cedar, 2 – 3 per section</dd></div><div class="spec-row"><dt>Pickets</dt><dd>Western Red Cedar, 5/8&quot; – 1&quot;</dd></div><div class="spec-row"><dt>Hardware</dt><dd>Hot-dipped galvanized / stainless</dd></div><div class="spec-row"><dt>Heights</dt><dd>4, 5, 6, 7, 8 ft</dd></div><div class="spec-row"><dt>Finish</dt><dd>Natural, stained, or sealed</dd></div></dl>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 01 — Western Red Cedar</span></div>
+    </div>
+  </section>
+
+  <section class="page chapter" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/service-vinyl.jpg')">
+    <div class="chapter-scrim"></div>
+    <div class="chapter-inner">
+      <header class="chapter-top">
+        <p class="eyebrow gold">Chapter 02</p>
+        <span class="chapter-big">02</span>
+      </header>
+      <div>
+        <p class="eyebrow gold">Collection 02 — Vinyl</p>
+        <h2 class="chapter-title">Vinyl fences</h2>
+        <p class="chapter-lede">A crisp, modern line that never needs painting or staining. Vinyl keeps its colour and its edge through every Pacific Northwest winter.</p>
+        <div class="meta-row"><div class="meta-cell"><p class="meta-label">Material</p><p class="meta-value">Virgin vinyl</p></div><div class="meta-cell"><p class="meta-label">Heights</p><p class="meta-value">4 – 6 ft</p></div><div class="meta-cell"><p class="meta-label">Upkeep</p><p class="meta-value">Rinse clean</p></div></div>
+      </div>
+      <p class="chapter-foot">Custom Fence &amp; Gates</p>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">01</span>
+        <span class="style-rule"></span>
+        <span class="tag">Zero maintenance</span>
+      </div>
+      <h3 class="style-name">Privacy Vinyl Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/vinyl-privacy.jpg')"></div>
+      <p class="style-blurb">Tongue-and-groove panels with no gaps — a seamless, bright-white wall of privacy.</p>
+      <ul class="chips"><li>Tongue-and-groove panels</li><li>Full privacy</li><li>6 ft standard</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 02 — Vinyl</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">02</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Lattice Top Vinyl Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/vinyl-lattice-top.jpg')"></div>
+      <p class="style-blurb">Full privacy below with a decorative lattice crown above — added height and softness without the upkeep.</p>
+      <ul class="chips"><li>Decorative lattice crown</li><li>Added height</li><li>Garden-friendly</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 02 — Vinyl</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">03</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Vinyl Picket Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/vinyl-picket.jpg')"></div>
+      <p class="style-blurb">Classic pickets scaled for front yards and garden borders, in fade-resistant white.</p>
+      <ul class="chips"><li>Straight picket top</li><li>Garden scale</li><li>Fade-resistant</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 02 — Vinyl</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">04</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Shadow Box Vinyl Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/vinyl-shadowbox.jpg')"></div>
+      <p class="style-blurb">Alternating boards finish the fence the same on both sides and let air and light filter through.</p>
+      <ul class="chips"><li>Finished both sides</li><li>Alternating boards</li><li>Semi-private</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 02 — Vinyl</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">05</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Vinyl Ranch Rail Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/vinyl-ranch-rail.jpg')"></div>
+      <p class="style-blurb">Open two- or three-rail vinyl for property lines and paddocks — a clean boundary that keeps the view.</p>
+      <ul class="chips"><li>2 – 3 open rails</li><li>Property-line scale</li><li>Open sightlines</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 02 — Vinyl</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">06</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Horizontal Vinyl Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/vinyl-horizontal.jpg')"></div>
+      <p class="style-blurb">A modern, architectural line of horizontal rails for contemporary elevations — no painting, ever.</p>
+      <ul class="chips"><li>Horizontal rails</li><li>Modern profile</li><li>Rinse-clean upkeep</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 02 — Vinyl</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <p class="eyebrow gold">Finishes &amp; specifications</p>
+      <h3 class="finishes-title">Vinyl colours</h3>
+      <div class="swatches"><div class="swatch"><span class="dot" style="background:#f4f3ef"></span><span>White</span></div><div class="swatch"><span class="dot" style="background:#e8dcc3"></span><span>Almond</span></div><div class="swatch"><span class="dot" style="background:#b8a98b"></span><span>Khaki</span></div><div class="swatch"><span class="dot" style="background:#23211f"></span><span>Black</span></div></div>
+      <dl class="specs"><div class="spec-row"><dt>Posts</dt><dd>5×5 vinyl, steel-reinforced as needed</dd></div><div class="spec-row"><dt>Panels</dt><dd>Tongue-and-groove or picket</dd></div><div class="spec-row"><dt>Hardware</dt><dd>Stainless, concealed</dd></div><div class="spec-row"><dt>Heights</dt><dd>4, 5, 6 ft</dd></div><div class="spec-row"><dt>Care</dt><dd>Rinse with a garden hose</dd></div><div class="spec-row"><dt>Warranty</dt><dd>Manufacturer limited lifetime</dd></div></dl>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 02 — Vinyl</span></div>
+    </div>
+  </section>
+
+  <section class="page chapter" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/composite-privacy.jpg')">
+    <div class="chapter-scrim"></div>
+    <div class="chapter-inner">
+      <header class="chapter-top">
+        <p class="eyebrow gold">Chapter 03</p>
+        <span class="chapter-big">03</span>
+      </header>
+      <div>
+        <p class="eyebrow gold">Collection 03 — Composite</p>
+        <h2 class="chapter-title">Composite fences</h2>
+        <p class="chapter-lede">The warmth of wood with the ease of vinyl. Composite boards won't rot, warp, or need staining — a fade-resistant, splinter-free line built from recycled wood and polymer.</p>
+        <div class="meta-row"><div class="meta-cell"><p class="meta-label">Material</p><p class="meta-value">Wood-polymer composite</p></div><div class="meta-cell"><p class="meta-label">Heights</p><p class="meta-value">6 – 8 ft</p></div><div class="meta-cell"><p class="meta-label">Upkeep</p><p class="meta-value">Rinse clean</p></div></div>
+      </div>
+      <p class="chapter-foot">Custom Fence &amp; Gates</p>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">01</span>
+        <span class="style-rule"></span>
+        <span class="tag">Low maintenance</span>
+      </div>
+      <h3 class="style-name">Privacy Composite Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/composite-privacy.jpg')"></div>
+      <p class="style-blurb">Full-height tongue-and-groove composite boards — a solid, wood-look wall of privacy that never needs refinishing.</p>
+      <ul class="chips"><li>Tongue-and-groove boards</li><li>Full privacy</li><li>6 – 8 ft height</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 03 — Composite</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">02</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Horizontal Composite Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/composite-horizontal.jpg')"></div>
+      <p class="style-blurb">A modern, architectural line of horizontal composite boards with concealed fasteners for a clean, uninterrupted face.</p>
+      <ul class="chips"><li>Horizontal board profile</li><li>Concealed fasteners</li><li>Aluminum or composite posts</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 03 — Composite</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <p class="eyebrow gold">Finishes &amp; specifications</p>
+      <h3 class="finishes-title">Composite colours</h3>
+      <div class="swatches"><div class="swatch"><span class="dot" style="background:#9a6b40"></span><span>Cedar</span></div><div class="swatch"><span class="dot" style="background:#5c3c28"></span><span>Walnut</span></div><div class="swatch"><span class="dot" style="background:#8d8a84"></span><span>Driftwood</span></div><div class="swatch"><span class="dot" style="background:#43474a"></span><span>Slate</span></div><div class="swatch"><span class="dot" style="background:#23211f"></span><span>Black</span></div></div>
+      <dl class="specs"><div class="spec-row"><dt>Boards</dt><dd>Capped wood-polymer composite</dd></div><div class="spec-row"><dt>Posts</dt><dd>Aluminum-reinforced composite</dd></div><div class="spec-row"><dt>Hardware</dt><dd>Stainless, concealed</dd></div><div class="spec-row"><dt>Heights</dt><dd>6, 7, 8 ft</dd></div><div class="spec-row"><dt>Care</dt><dd>Rinse with a garden hose</dd></div><div class="spec-row"><dt>Warranty</dt><dd>Manufacturer limited</dd></div></dl>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 03 — Composite</span></div>
+    </div>
+  </section>
+
+  <section class="page chapter" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/service-chain-link.jpg')">
+    <div class="chapter-scrim"></div>
+    <div class="chapter-inner">
+      <header class="chapter-top">
+        <p class="eyebrow gold">Chapter 04</p>
+        <span class="chapter-big">04</span>
+      </header>
+      <div>
+        <p class="eyebrow gold">Collection 04 — Chain-Link</p>
+        <h2 class="chapter-title">Chain-link fences</h2>
+        <p class="chapter-lede">Honest, hard-working enclosure that keeps sightlines open and costs down — for backyards, pet runs, side yards, and secure commercial lots.</p>
+        <div class="meta-row"><div class="meta-cell"><p class="meta-label">Material</p><p class="meta-value">Galvanized / coated steel</p></div><div class="meta-cell"><p class="meta-label">Heights</p><p class="meta-value">3 – 8 ft</p></div><div class="meta-cell"><p class="meta-label">Use</p><p class="meta-value">Home &amp; commercial</p></div></div>
+      </div>
+      <p class="chapter-foot">Custom Fence &amp; Gates</p>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">01</span>
+        <span class="style-rule"></span>
+        <span class="tag">Best value</span>
+      </div>
+      <h3 class="style-name">Chain Link Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/chain-link-classic.jpg')"></div>
+      <p class="style-blurb">The workhorse — galvanized or black-coated mesh and framework that shrug off weather for decades with almost no upkeep.</p>
+      <ul class="chips"><li>9 – 11.5 gauge mesh</li><li>Galvanized or coated framework</li><li>Low maintenance</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 04 — Chain-Link</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">02</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Chain Link Fence with Privacy Slats</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/chain-link-privacy-slats.jpg')"></div>
+      <p class="style-blurb">Woven slats drop into the mesh to add privacy and screening while keeping the fence's hard-working frame.</p>
+      <ul class="chips"><li>Woven privacy slats</li><li>Added screening</li><li>Pet &amp; yard friendly</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 04 — Chain-Link</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <p class="eyebrow gold">Finishes &amp; specifications</p>
+      <h3 class="finishes-title">Mesh finishes</h3>
+      <div class="swatches"><div class="swatch"><span class="dot" style="background:#b4b7ba"></span><span>Galvanized</span></div><div class="swatch"><span class="dot" style="background:#26282a"></span><span>Black</span></div><div class="swatch"><span class="dot" style="background:#2f4a32"></span><span>Green</span></div><div class="swatch"><span class="dot" style="background:#4a3a2c"></span><span>Brown</span></div></div>
+      <dl class="specs"><div class="spec-row"><dt>Mesh</dt><dd>9 – 11.5 gauge</dd></div><div class="spec-row"><dt>Framework</dt><dd>Galvanized steel pipe</dd></div><div class="spec-row"><dt>Coating</dt><dd>Galvanized or PVC</dd></div><div class="spec-row"><dt>Heights</dt><dd>3 – 8 ft</dd></div><div class="spec-row"><dt>Gates</dt><dd>Walk &amp; drive</dd></div><div class="spec-row"><dt>Use</dt><dd>Residential, commercial, pet</dd></div></dl>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 04 — Chain-Link</span></div>
+    </div>
+  </section>
+
+  <section class="page chapter" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/service-aluminum.jpg')">
+    <div class="chapter-scrim"></div>
+    <div class="chapter-inner">
+      <header class="chapter-top">
+        <p class="eyebrow gold">Chapter 05</p>
+        <span class="chapter-big">05</span>
+      </header>
+      <div>
+        <p class="eyebrow gold">Collection 05 — Aluminum</p>
+        <h2 class="chapter-title">Aluminum fences</h2>
+        <p class="chapter-lede">The elegance of wrought iron with none of the rust. Aluminum defines a boundary without blocking the view — the finishing touch for front yards, pools, and homes with scenery worth showing off.</p>
+        <div class="meta-row"><div class="meta-cell"><p class="meta-label">Material</p><p class="meta-value">Rust-free aluminum</p></div><div class="meta-cell"><p class="meta-label">Heights</p><p class="meta-value">4 – 6 ft</p></div><div class="meta-cell"><p class="meta-label">Grade</p><p class="meta-value">Residential – industrial</p></div></div>
+      </div>
+      <p class="chapter-foot">Custom Fence &amp; Gates</p>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">01</span>
+        <span class="style-rule"></span>
+        <span class="tag">Pool-code ready</span>
+      </div>
+      <h3 class="style-name">Classic Aluminium Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/aluminum-classic.jpg')"></div>
+      <p class="style-blurb">Slim flush-top pickets, powder-coated and rackable to follow a sloping yard cleanly.</p>
+      <ul class="chips"><li>Flush-top pickets</li><li>Rackable for slopes</li><li>Powder-coated</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 05 — Aluminum</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">02</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Spear Top Aluminium Fence</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/aluminum-spear-top.jpg')"></div>
+      <p class="style-blurb">Pointed spear-top pickets with decorative finials — the elegance of wrought iron, with none of the rust.</p>
+      <ul class="chips"><li>Spear-top pickets</li><li>Decorative finials</li><li>Powder-coated</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 05 — Aluminum</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <p class="eyebrow gold">Finishes &amp; specifications</p>
+      <h3 class="finishes-title">Powder-coat colours</h3>
+      <div class="swatches"><div class="swatch"><span class="dot" style="background:#1f1e1d"></span><span>Black</span></div><div class="swatch"><span class="dot" style="background:#4b3b2a"></span><span>Bronze</span></div><div class="swatch"><span class="dot" style="background:#f1efe9"></span><span>White</span></div><div class="swatch"><span class="dot" style="background:#cbbfa6"></span><span>Sand</span></div></div>
+      <dl class="specs"><div class="spec-row"><dt>Material</dt><dd>6005-T5 aluminum</dd></div><div class="spec-row"><dt>Finish</dt><dd>AAMA powder-coat</dd></div><div class="spec-row"><dt>Grades</dt><dd>Residential / commercial / industrial</dd></div><div class="spec-row"><dt>Heights</dt><dd>4 – 6 ft</dd></div><div class="spec-row"><dt>Slopes</dt><dd>Rackable panels</dd></div><div class="spec-row"><dt>Gates</dt><dd>Self-closing, pool-code</dd></div></dl>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 05 — Aluminum</span></div>
+    </div>
+  </section>
+
+  <section class="page chapter" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/service-fence-repair.jpg')">
+    <div class="chapter-scrim"></div>
+    <div class="chapter-inner">
+      <header class="chapter-top">
+        <p class="eyebrow gold">Chapter 06</p>
+        <span class="chapter-big">06</span>
+      </header>
+      <div>
+        <p class="eyebrow gold">Collection 06 — Repair &amp; Restore</p>
+        <h2 class="chapter-title">Fence repair</h2>
+        <p class="chapter-lede">Before you replace, let us assess. Most fences can be brought back to straight, safe, and solid for a fraction of the cost of starting over.</p>
+        <div class="meta-row"><div class="meta-cell"><p class="meta-label">Visit</p><p class="meta-value">Free assessment</p></div><div class="meta-cell"><p class="meta-label">Scope</p><p class="meta-value">Repair or restore</p></div><div class="meta-cell"><p class="meta-label">Timeline</p><p class="meta-value">Often same-week</p></div></div>
+      </div>
+      <p class="chapter-foot">Custom Fence &amp; Gates</p>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">01</span>
+        <span class="style-rule"></span>
+        <span class="tag">Most cost-effective</span>
+      </div>
+      <h3 class="style-name">Restore &amp; Re-stain</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/service-fence-repair.jpg')"></div>
+      <p class="style-blurb">Clean, sand, swap any failed boards, and re-finish — years added to a fence that still has good bones.</p>
+      <ul class="chips"><li>Clean, sand &amp; re-finish</li><li>Replace failed boards</li><li>Save vs. replace</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 06 — Repair &amp; Restore</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">02</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Structural Repair</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/hero-before-fence.jpg')"></div>
+      <p class="style-blurb">Reset leaning posts, re-hang sagging gates, and rebuild storm damage so the fence stands true again.</p>
+      <ul class="chips"><li>Reset leaning posts</li><li>Re-hang sagging gates</li><li>Storm-damage rebuild</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 06 — Repair &amp; Restore</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <p class="eyebrow gold">Finishes &amp; specifications</p>
+      <h3 class="finishes-title">Restoration finishes</h3>
+      <div class="swatches"><div class="swatch"><span class="dot" style="background:#d9c7a3"></span><span>Clear seal</span></div><div class="swatch"><span class="dot" style="background:#b9793f"></span><span>Honey</span></div><div class="swatch"><span class="dot" style="background:#8d8a84"></span><span>Gray</span></div><div class="swatch"><span class="dot" style="background:#3a3330"></span><span>Solid</span></div></div>
+      <dl class="specs"><div class="spec-row"><dt>Assessment</dt><dd>On-site, no obligation</dd></div><div class="spec-row"><dt>Posts</dt><dd>Reset or replace</dd></div><div class="spec-row"><dt>Boards</dt><dd>Matched to existing profile</dd></div><div class="spec-row"><dt>Gates</dt><dd>Re-hang &amp; re-hardware</dd></div><div class="spec-row"><dt>Finish</dt><dd>Clean &amp; re-stain</dd></div><div class="spec-row"><dt>Timeline</dt><dd>Often same-week</dd></div></dl>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 06 — Repair &amp; Restore</span></div>
+    </div>
+  </section>
+
+  <section class="page chapter" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/service-custom-gates.jpg')">
+    <div class="chapter-scrim"></div>
+    <div class="chapter-inner">
+      <header class="chapter-top">
+        <p class="eyebrow gold">Chapter 07</p>
+        <span class="chapter-big">07</span>
+      </header>
+      <div>
+        <p class="eyebrow gold">Collection 07 — Custom Gates</p>
+        <h2 class="chapter-title">Custom gates</h2>
+        <p class="chapter-lede">The part of your fence you touch every day. Built to match, hung to last, and finished with hardware that stays smooth and secure for years.</p>
+        <div class="meta-row"><div class="meta-cell"><p class="meta-label">Build</p><p class="meta-value">Made to order</p></div><div class="meta-cell"><p class="meta-label">Operation</p><p class="meta-value">Manual or automated</p></div><div class="meta-cell"><p class="meta-label">Match</p><p class="meta-value">Built to your fence</p></div></div>
+      </div>
+      <p class="chapter-foot">Custom Fence &amp; Gates</p>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">01</span>
+        <span class="style-rule"></span>
+        <span class="tag">Everyday entry</span>
+      </div>
+      <h3 class="style-name">Walk Gate</h3>
+      <div class="style-img" style="background-image:url('file:///Users/adnan/Desktop/backyardoriginal/custom-fence-gates/CustomFence-Gates/public/service-custom-gates.jpg')"></div>
+      <p class="style-blurb">A single everyday entry, braced to never sag, with self-closing hinges and infill that matches your fence.</p>
+      <ul class="chips"><li>3 – 4 ft single gate</li><li>Self-closing hinges</li><li>Matching infill</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 07 — Custom Gates</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">02</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Double Drive Gate</h3>
+      <div class="style-img placeholder"><span>02</span></div>
+      <p class="style-blurb">Wide openings for driveways and side-yard access, with drop-rod, cane bolt, and room for automation.</p>
+      <ul class="chips"><li>Up to 16 ft opening</li><li>Drop-rod &amp; cane bolt</li><li>Automation-ready</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 07 — Custom Gates</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <div class="style-head">
+        <span class="style-num">03</span>
+        <span class="style-rule"></span>
+        
+      </div>
+      <h3 class="style-name">Decorative &amp; Arched</h3>
+      <div class="style-img placeholder"><span>03</span></div>
+      <p class="style-blurb">A statement entry — arched or scalloped tops, clavos, and strap hinges on a welded or braced frame.</p>
+      <ul class="chips"><li>Arched or scalloped top</li><li>Clavos &amp; strap hinges</li><li>Welded / braced frame</li></ul>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 07 — Custom Gates</span></div>
+    </div>
+  </section>
+
+  <section class="page light">
+    <div class="pad">
+      <p class="eyebrow gold">Finishes &amp; specifications</p>
+      <h3 class="finishes-title">Gate hardware</h3>
+      <div class="swatches"><div class="swatch"><span class="dot" style="background:#1f1e1d"></span><span>Black</span></div><div class="swatch"><span class="dot" style="background:#3a2c20"></span><span>Bronze</span></div><div class="swatch"><span class="dot" style="background:#b7bbbe"></span><span>Stainless</span></div><div class="swatch"><span class="dot" style="background:#f1efe9"></span><span>White</span></div></div>
+      <dl class="specs"><div class="spec-row"><dt>Frame</dt><dd>Welded steel or braced wood</dd></div><div class="spec-row"><dt>Hinges</dt><dd>Heavy-duty self-closing</dd></div><div class="spec-row"><dt>Latch</dt><dd>Gravity / magnetic / keyed</dd></div><div class="spec-row"><dt>Widths</dt><dd>3 – 16 ft</dd></div><div class="spec-row"><dt>Automation</dt><dd>Swing &amp; slide operators</dd></div><div class="spec-row"><dt>Match</dt><dd>Infill matches your fence</dd></div></dl>
+      <div class="footer"><span>Custom Fence &amp; Gates</span><span>Collection 07 — Custom Gates</span></div>
+    </div>
+  </section>
+
+  <section class="page back">
+    <div class="pad back-inner">
+      <p class="eyebrow gold">Let&rsquo;s build it</p>
+      <div>
+        <h2 class="back-title">Request a free estimate.</h2>
+        <p class="back-lede">Tell us your yard size, the collection you like, and a height.
+          We&rsquo;ll reply with a clear, no-obligation estimate.</p>
+        <div class="back-contact">
+          <div><p class="back-label">Call</p><p class="back-value">0400 000 000</p></div>
+          <div><p class="back-label">Email</p><p class="back-value">enquiries@homerenewrenovation.example</p></div>
+        </div>
+      </div>
+      <p class="back-foot">Custom Fence &amp; Gates · Seattle Metro</p>
+    </div>
+  </section></body></html>

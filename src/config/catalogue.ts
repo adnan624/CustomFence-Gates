@@ -259,8 +259,71 @@ export const CATALOGUE: CatalogueCategory[] = [
     ],
   },
   {
+    slug: "composite-fences",
+    eyebrow: "Collection 03 — Composite",
+    hero: {
+      src: "/composite-privacy.jpg",
+      alt: "Modern composite privacy fence with wood-grain boards along a landscaped backyard",
+    },
+    lede: "The warmth of wood with the ease of vinyl. Composite boards won't rot, warp, or need staining — a fade-resistant, splinter-free line built from recycled wood and polymer.",
+    meta: [
+      { label: "Material", value: "Wood-polymer composite" },
+      { label: "Heights", value: "6 – 8 ft" },
+      { label: "Upkeep", value: "Rinse clean" },
+    ],
+    styles: [
+      {
+        name: "Privacy Composite Fence",
+        blurb:
+          "Full-height tongue-and-groove composite boards — a solid, wood-look wall of privacy that never needs refinishing.",
+        image: {
+          src: "/composite-privacy.jpg",
+          alt: "Composite privacy fence with vertical wood-grain boards beside a landscaped garden border",
+        },
+        specs: [
+          "Tongue-and-groove boards",
+          "Full privacy",
+          "6 – 8 ft height",
+        ],
+        tag: "Low maintenance",
+      },
+      {
+        name: "Horizontal Composite Fence",
+        blurb:
+          "A modern, architectural line of horizontal composite boards with concealed fasteners for a clean, uninterrupted face.",
+        image: {
+          src: "/composite-horizontal.jpg",
+          alt: "Modern horizontal slat composite fence with wood-grain boards and black posts beside a lawn",
+        },
+        specs: [
+          "Horizontal board profile",
+          "Concealed fasteners",
+          "Aluminum or composite posts",
+        ],
+      },
+    ],
+    finishes: {
+      label: "Composite colours",
+      swatches: [
+        { name: "Cedar", hex: "#9a6b40" },
+        { name: "Walnut", hex: "#5c3c28" },
+        { name: "Driftwood", hex: "#8d8a84" },
+        { name: "Slate", hex: "#43474a" },
+        { name: "Black", hex: "#23211f" },
+      ],
+    },
+    specSheet: [
+      { label: "Boards", value: "Capped wood-polymer composite" },
+      { label: "Posts", value: "Aluminum-reinforced composite" },
+      { label: "Hardware", value: "Stainless, concealed" },
+      { label: "Heights", value: "6, 7, 8 ft" },
+      { label: "Care", value: "Rinse with a garden hose" },
+      { label: "Warranty", value: "Manufacturer limited" },
+    ],
+  },
+  {
     slug: "chain-link-fences",
-    eyebrow: "Collection 03 — Chain-Link",
+    eyebrow: "Collection 04 — Chain-Link",
     hero: {
       src: "/service-chain-link.jpg",
       alt: "Black vinyl-coated chain-link fence running along a grassy field",
@@ -313,7 +376,7 @@ export const CATALOGUE: CatalogueCategory[] = [
     ],  },
   {
     slug: "aluminum-fences",
-    eyebrow: "Collection 04 — Aluminum",
+    eyebrow: "Collection 05 — Aluminum",
     hero: {
       src: "/service-aluminum.jpg",
       alt: "Black aluminum fence bordering a landscaped backyard with a lake view",
@@ -366,7 +429,7 @@ export const CATALOGUE: CatalogueCategory[] = [
     ],  },
   {
     slug: "fence-repair",
-    eyebrow: "Collection 05 — Repair & Restore",
+    eyebrow: "Collection 06 — Repair & Restore",
     hero: {
       src: "/service-fence-repair.jpg",
       alt: "Worker spray-staining and restoring a wood privacy fence in a backyard",
@@ -419,7 +482,7 @@ export const CATALOGUE: CatalogueCategory[] = [
     ],  },
   {
     slug: "custom-gates",
-    eyebrow: "Collection 06 — Custom Gates",
+    eyebrow: "Collection 07 — Custom Gates",
     hero: {
       src: "/service-custom-gates.jpg",
       alt: "Custom-built cedar gate with an X-brace and black strap hinges",

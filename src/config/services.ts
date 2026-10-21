@@ -8,6 +8,7 @@
 export const SERVICES = [
   { slug: "cedar-fences", title: "Cedar fences" },
   { slug: "vinyl-fences", title: "Vinyl fences" },
+  { slug: "composite-fences", title: "Composite fences" },
   { slug: "chain-link-fences", title: "Chain-link fences" },
   { slug: "aluminum-fences", title: "Aluminum fences" },
   { slug: "fence-repair", title: "Fence repair" },

@@ -251,8 +251,9 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
             Fence &amp; gate collections.
           </h2>
           <p className="mt-3 max-w-[34ch] text-[11px] leading-relaxed text-white/85">
-            Six collections — cedar, vinyl, chain-link, aluminum, repairs, and
-            custom gates. Flip through for styles, finishes, and specifications.
+            Seven collections — cedar, vinyl, composite, chain-link, aluminum,
+            repairs, and custom gates. Flip through for styles, finishes, and
+            specifications.
           </p>
         </div>
         <p className="text-[8px] uppercase tracking-[0.2em] text-white/60">
