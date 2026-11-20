@@ -148,11 +148,15 @@ export const CATALOGUE: CatalogueCategory[] = [
     finishes: {
       label: "Cedar finishes",
       swatches: [
-        { name: "Natural", hex: "#c89b6a" },
-        { name: "Honey", hex: "#b9793f" },
-        { name: "Cedartone", hex: "#8a4b2a" },
-        { name: "Driftwood", hex: "#8d8a84" },
-        { name: "Ebony", hex: "#2a2622" },
+        { name: "Cedar Tone", hex: "#744327" },
+        { name: "Redwood", hex: "#724127" },
+        { name: "Leatherwood", hex: "#5D3B21" },
+        { name: "Oxford Brown", hex: "#4B2D19" },
+        { name: "Cumberland Brown", hex: "#5F381E" },
+        { name: "Rustic Oak", hex: "#744622" },
+        { name: "Sierra", hex: "#854D2D" },
+        { name: "Sable Brown", hex: "#72462B" },
+        { name: "Coffee Brown", hex: "#5F452E" },
       ],
     },
     specSheet: [
@@ -263,62 +267,54 @@ export const CATALOGUE: CatalogueCategory[] = [
     eyebrow: "Collection 03 — Composite",
     hero: {
       src: "/composite-privacy.jpg",
-      alt: "Modern composite privacy fence with wood-grain boards along a landscaped backyard",
+      alt: "Wood-grain composite privacy fence along a landscaped backyard border",
     },
-    lede: "The warmth of wood with the ease of vinyl. Composite boards won't rot, warp, or need staining — a fade-resistant, splinter-free line built from recycled wood and polymer.",
+    lede: "The warmth of wood with none of the weekends. Composite boards won't rot, warp, or need staining — just a wood-grain finish that holds its colour season after season.",
     meta: [
-      { label: "Material", value: "Wood-polymer composite" },
-      { label: "Heights", value: "6 – 8 ft" },
+      { label: "Material", value: "Wood-plastic composite" },
+      { label: "Heights", value: "4 – 6 ft" },
       { label: "Upkeep", value: "Rinse clean" },
     ],
     styles: [
       {
         name: "Privacy Composite Fence",
         blurb:
-          "Full-height tongue-and-groove composite boards — a solid, wood-look wall of privacy that never needs refinishing.",
+          "Full-height composite boards with a realistic wood grain — a solid privacy wall that never needs refinishing.",
         image: {
           src: "/composite-privacy.jpg",
-          alt: "Composite privacy fence with vertical wood-grain boards beside a landscaped garden border",
+          alt: "Wood-grain composite privacy fence beside a landscaped lawn",
         },
-        specs: [
-          "Tongue-and-groove boards",
-          "Full privacy",
-          "6 – 8 ft height",
-        ],
-        tag: "Low maintenance",
+        specs: ["Full privacy face", "Wood-grain finish", "6 ft standard"],
+        tag: "Zero maintenance",
       },
       {
         name: "Horizontal Composite Fence",
         blurb:
-          "A modern, architectural line of horizontal composite boards with concealed fasteners for a clean, uninterrupted face.",
+          "A modern, architectural line of horizontal composite boards for contemporary elevations — no staining, ever.",
         image: {
           src: "/composite-horizontal.jpg",
-          alt: "Modern horizontal slat composite fence with wood-grain boards and black posts beside a lawn",
+          alt: "Modern horizontal composite fence with landscape lighting at dusk",
         },
-        specs: [
-          "Horizontal board profile",
-          "Concealed fasteners",
-          "Aluminum or composite posts",
-        ],
+        specs: ["Horizontal boards", "Modern profile", "Rinse-clean upkeep"],
       },
     ],
     finishes: {
       label: "Composite colours",
       swatches: [
-        { name: "Cedar", hex: "#9a6b40" },
-        { name: "Walnut", hex: "#5c3c28" },
-        { name: "Driftwood", hex: "#8d8a84" },
-        { name: "Slate", hex: "#43474a" },
-        { name: "Black", hex: "#23211f" },
+        { name: "Cedar", hex: "#8a5a34" },
+        { name: "Walnut", hex: "#5a4030" },
+        { name: "Teak", hex: "#9a6b3f" },
+        { name: "Slate Gray", hex: "#6f706d" },
+        { name: "Charcoal", hex: "#3a3836" },
       ],
     },
     specSheet: [
-      { label: "Boards", value: "Capped wood-polymer composite" },
       { label: "Posts", value: "Aluminum-reinforced composite" },
+      { label: "Boards", value: "Capped wood-plastic composite" },
       { label: "Hardware", value: "Stainless, concealed" },
-      { label: "Heights", value: "6, 7, 8 ft" },
+      { label: "Heights", value: "4, 5, 6 ft" },
       { label: "Care", value: "Rinse with a garden hose" },
-      { label: "Warranty", value: "Manufacturer limited" },
+      { label: "Warranty", value: "Manufacturer limited warranty" },
     ],
   },
   {

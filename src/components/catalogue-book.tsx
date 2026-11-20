@@ -251,9 +251,8 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
             Fence &amp; gate collections.
           </h2>
           <p className="mt-3 max-w-[34ch] text-[11px] leading-relaxed text-white/85">
-            Seven collections — cedar, vinyl, composite, chain-link, aluminum,
-            repairs, and custom gates. Flip through for styles, finishes, and
-            specifications.
+            Six collections — cedar, vinyl, chain-link, aluminum, repairs, and
+            custom gates. Flip through for styles, finishes, and specifications.
           </p>
         </div>
         <p className="text-[8px] uppercase tracking-[0.2em] text-white/60">
@@ -286,7 +285,7 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
                   {titleFor(c.slug)}
                 </p>
                 <p className="truncate text-[9px] uppercase tracking-[0.12em] text-[var(--color-muted)]">
-                  {c.eyebrow}
+                  {/* {c.eyebrow} */}
                 </p>
               </div>
             </li>
@@ -301,6 +300,7 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
   // Chapters
   CATALOGUE.forEach((collection: CatalogueCategory, ci) => {
     const title = titleFor(collection.slug);
+    const featuredTag = collection.styles.find((s) => s.tag)?.tag;
 
     // Chapter opener (hero)
     push(
@@ -312,9 +312,16 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0c1612] via-[#0c1612]/70 to-[#0c1612]/25" />
         <div className="relative flex h-full flex-col justify-between p-7 text-white">
           <div className="flex items-start justify-between">
-            <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-[var(--color-gold)]">
-              Chapter {pad(ci + 1)}
-            </p>
+            <div className="flex flex-col items-start gap-2">
+              <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-[var(--color-gold)]">
+                Chapter {pad(ci + 1)}
+              </p>
+              {featuredTag ? (
+                <span className="rounded-full bg-white/15 px-2.5 py-1 text-[8px] font-semibold uppercase tracking-wider text-white ring-1 ring-white/20 backdrop-blur-sm">
+                  {featuredTag}
+                </span>
+              ) : null}
+            </div>
             <span className="font-[family-name:var(--font-impact)] text-5xl leading-none text-white/25">
               {pad(ci + 1)}
             </span>
@@ -356,11 +363,6 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
                 {pad(si + 1)}
               </span>
               <span className="h-px flex-1 bg-[var(--color-border)]" aria-hidden />
-              {style.tag ? (
-                <span className="rounded-full bg-[var(--color-night)] px-2.5 py-1 text-[8px] font-semibold uppercase tracking-wider text-white">
-                  {style.tag}
-                </span>
-              ) : null}
             </div>
             <h3 className="font-[family-name:var(--font-display)] mt-3 text-xl font-semibold tracking-tight text-[var(--color-ink)]">
               {style.name}
@@ -400,15 +402,20 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
           <h3 className="font-[family-name:var(--font-display)] mt-2 text-lg font-semibold tracking-tight text-[var(--color-ink)]">
             {collection.finishes.label}
           </h3>
-          <div className="mt-4 flex flex-wrap gap-x-4 gap-y-4">
+          <div className="mt-4 flex flex-wrap gap-x-2 gap-y-3">
             {collection.finishes.swatches.map((sw) => (
               <div key={sw.name} className="flex flex-col items-center gap-1.5">
                 <span
-                  className="h-10 w-10 rounded-full shadow-inner ring-1 ring-black/10"
-                  style={{ backgroundColor: sw.hex }}
+                  className="h-20 w-12 overflow-hidden rounded-[4px] shadow-inner ring-1 ring-black/15"
+                  style={{
+                    backgroundColor: sw.hex,
+                    backgroundImage:
+                      "repeating-linear-gradient(90deg, rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 0.5px, rgba(0,0,0,0) 0.5px, rgba(0,0,0,0) 2px, rgba(255,255,255,0.08) 2px, rgba(255,255,255,0.08) 2.5px, rgba(0,0,0,0) 2.5px, rgba(0,0,0,0) 5px), linear-gradient(90deg, rgba(255,255,255,0.14), rgba(0,0,0,0) 35%, rgba(0,0,0,0.18))",
+                    backgroundBlendMode: "overlay, multiply",
+                  }}
                   aria-hidden
                 />
-                <span className="text-[8px] font-medium text-[var(--color-muted)]">
+                <span className="w-14 text-center text-[8px] font-medium leading-tight text-[var(--color-muted)]">
                   {sw.name}
                 </span>
               </div>
