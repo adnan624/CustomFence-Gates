@@ -407,12 +407,21 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
               <div key={sw.name} className="flex flex-col items-center gap-1.5">
                 <span
                   className="h-20 w-12 overflow-hidden rounded-[4px] shadow-inner ring-1 ring-black/15"
-                  style={{
-                    backgroundColor: sw.hex,
-                    backgroundImage:
-                      "repeating-linear-gradient(90deg, rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 0.5px, rgba(0,0,0,0) 0.5px, rgba(0,0,0,0) 2px, rgba(255,255,255,0.08) 2px, rgba(255,255,255,0.08) 2.5px, rgba(0,0,0,0) 2.5px, rgba(0,0,0,0) 5px), linear-gradient(90deg, rgba(255,255,255,0.14), rgba(0,0,0,0) 35%, rgba(0,0,0,0.18))",
-                    backgroundBlendMode: "overlay, multiply",
-                  }}
+                  style={
+                    sw.image
+                      ? {
+                          backgroundColor: sw.hex,
+                          backgroundImage: `url("${sw.image}")`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }
+                      : {
+                          backgroundColor: sw.hex,
+                          backgroundImage:
+                            "repeating-linear-gradient(90deg, rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 0.5px, rgba(0,0,0,0) 0.5px, rgba(0,0,0,0) 2px, rgba(255,255,255,0.08) 2px, rgba(255,255,255,0.08) 2.5px, rgba(0,0,0,0) 2.5px, rgba(0,0,0,0) 5px), linear-gradient(90deg, rgba(255,255,255,0.14), rgba(0,0,0,0) 35%, rgba(0,0,0,0.18))",
+                          backgroundBlendMode: "overlay, multiply",
+                        }
+                  }
                   aria-hidden
                 />
                 <span className="w-14 text-center text-[8px] font-medium leading-tight text-[var(--color-muted)]">

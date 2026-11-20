@@ -7,7 +7,12 @@
  */
 import type { ServiceSlug } from "@/config/services";
 
-export type Swatch = { name: string; hex: string };
+export type Swatch = {
+  name: string;
+  hex: string;
+  /** Real stain-sample photo; when set it replaces the synthetic grain. */
+  image?: string;
+};
 
 export type CatalogueStyle = {
   name: string;
@@ -148,15 +153,16 @@ export const CATALOGUE: CatalogueCategory[] = [
     finishes: {
       label: "Cedar finishes",
       swatches: [
-        { name: "Cedar Tone", hex: "#744327" },
-        { name: "Redwood", hex: "#724127" },
-        { name: "Leatherwood", hex: "#5D3B21" },
-        { name: "Oxford Brown", hex: "#4B2D19" },
-        { name: "Cumberland Brown", hex: "#5F381E" },
-        { name: "Rustic Oak", hex: "#744622" },
-        { name: "Sierra", hex: "#854D2D" },
-        { name: "Sable Brown", hex: "#72462B" },
-        { name: "Coffee Brown", hex: "#5F452E" },
+        { name: "Redwood", hex: "#7A2E22", image: "/cedar-stain-redwood.jpg" },
+        { name: "Cedar Tone", hex: "#9C5A2E", image: "/cedar-stain-cedar-tone.jpg" },
+        { name: "Oxford Brown", hex: "#3E2A1C", image: "/cedar-stain-oxford-brown.jpg" },
+        { name: "Cumberland Brown", hex: "#7A4E28", image: "/cedar-stain-cumberland-brown.jpg" },
+        { name: "Rustic Oak", hex: "#B06A2C", image: "/cedar-stain-rustic-oak.jpg" },
+        { name: "Sable Brown", hex: "#8A6A4A", image: "/cedar-stain-sable-brown.jpg" },
+        { name: "Coffee Brown", hex: "#6B5847", image: "/cedar-stain-coffee-brown.jpg" },
+        { name: "Timber Gray", hex: "#8D8A84", image: "/cedar-stain-timber-gray.jpg" },
+        { name: "Driftwood Gray", hex: "#B0ACA6", image: "/cedar-stain-driftwood-gray.jpg" },
+        { name: "Natural (Clear)", hex: "#D9C4A3", image: "/cedar-stain-natural-clear.jpg" },
       ],
     },
     specSheet: [
