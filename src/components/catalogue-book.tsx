@@ -367,7 +367,11 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
             <h3 className="font-[family-name:var(--font-display)] mt-3 text-xl font-semibold tracking-tight text-[var(--color-ink)]">
               {style.name}
             </h3>
-            <div className="mt-3 h-36 w-full overflow-hidden rounded-xl ring-1 ring-[var(--color-border)]">
+            <div
+              className={`mt-3 w-full overflow-hidden rounded-xl ring-1 ring-[var(--color-border)] ${
+                style.samples ? "h-28" : "h-36"
+              }`}
+            >
               {style.image ? (
                 <div
                   className="h-full w-full bg-cover bg-center"
@@ -385,6 +389,37 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
               {style.blurb}
             </p>
             {chipList(style.specs)}
+            {style.samples ? (
+              <div className="mt-3">
+                <div className="flex items-center gap-2">
+                  <span className="text-[8px] font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                    {style.samples.label}
+                  </span>
+                  <span className="h-px flex-1 bg-[var(--color-border)]" aria-hidden />
+                </div>
+                <div className="mt-2 grid grid-cols-2 gap-3">
+                  {style.samples.items.map((item) => (
+                    <div key={item.name} className="flex flex-col items-center gap-1">
+                      <span
+                        className="h-12 w-full"
+                        style={{
+                          backgroundImage: `url("${item.image}")`,
+                          backgroundSize: "contain",
+                          backgroundPosition: "center",
+                          backgroundRepeat: "no-repeat",
+                          filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.14))",
+                        }}
+                        role="img"
+                        aria-label={item.name}
+                      />
+                      <span className="text-center text-[8px] font-medium leading-tight text-[var(--color-muted)]">
+                        {item.name}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
             {pageFooter(collection.eyebrow)}
           </div>
         </div>,
@@ -450,6 +485,57 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
       </div>,
       collection.eyebrow,
     );
+
+    // Materials & components (optional)
+    if (collection.materials) {
+      push(
+        <div key={`${collection.slug}-materials`} className="cf-page" data-density="soft">
+          <div className="relative flex h-full flex-col p-7">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+              {collection.materials.label}
+            </p>
+            <h3 className="font-[family-name:var(--font-display)] mt-2 text-base font-semibold tracking-tight text-[var(--color-ink)]">
+              Cedar grades &amp; lumber
+            </h3>
+            <div className="mt-2.5 flex min-h-0 flex-1 flex-col gap-2.5">
+              {collection.materials.sections.map((section) => (
+                <div key={section.label}>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[8px] font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                      {section.label}
+                    </span>
+                    <span className="h-px flex-1 bg-[var(--color-border)]" aria-hidden />
+                  </div>
+                  <div className="mt-1.5 grid grid-cols-3 gap-x-2 gap-y-1.5">
+                    {section.items.map((item) => (
+                      <div key={item.name} className="flex flex-col items-center gap-0.5">
+                        <span
+                          className="h-[42px] w-full"
+                          style={{
+                            backgroundImage: `url("${item.image}")`,
+                            backgroundSize: "contain",
+                            backgroundPosition: "center bottom",
+                            backgroundRepeat: "no-repeat",
+                            filter: "drop-shadow(0 1.5px 2px rgba(0,0,0,0.16))",
+                          }}
+                          role="img"
+                          aria-label={item.name}
+                        />
+                        <span className="text-center text-[7px] font-medium leading-tight text-[var(--color-muted)]">
+                          {item.name}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            {pageFooter(collection.eyebrow)}
+          </div>
+        </div>,
+        collection.eyebrow,
+      );
+    }
   });
 
   // Back cover (hard)

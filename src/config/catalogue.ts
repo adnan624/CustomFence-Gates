@@ -22,9 +22,16 @@ export type CatalogueStyle = {
   specs: string[];
   /** Small corner badge, e.g. "Most requested". */
   tag?: string;
+  /** Optional labelled face/pattern options (transparent cut-outs). */
+  samples?: { label: string; items: MaterialItem[] };
 };
 
 export type CatalogueImage = { src: string; alt: string };
+
+export type MaterialItem = { name: string; image: string };
+
+/** Optional "materials & components" reference, grouped into sections. */
+export type MaterialSection = { label: string; items: MaterialItem[] };
 
 export type CatalogueCategory = {
   slug: ServiceSlug;
@@ -37,6 +44,8 @@ export type CatalogueCategory = {
   styles: CatalogueStyle[];
   finishes: { label: string; swatches: Swatch[] };
   specSheet: { label: string; value: string }[];
+  /** Optional materials page — real component photos, grouped by section. */
+  materials?: { label: string; sections: MaterialSection[] };
 };
 
 export const CATALOGUE: CatalogueCategory[] = [
@@ -92,6 +101,13 @@ export const CATALOGUE: CatalogueCategory[] = [
           alt: "Cedar privacy fence with a decorative lattice top and garden beds",
         },
         specs: ["Decorative lattice crown", "Garden-friendly", "Added height"],
+        samples: {
+          label: "Lattice face",
+          items: [
+            { name: "Standard Diagonal Lattice", image: "/cedar-mat-lattice-diagonal.png" },
+            { name: "Square Lattice", image: "/cedar-mat-lattice-square.png" },
+          ],
+        },
       },
       {
         name: "Horizontal Slat Cedar Fence",
@@ -173,6 +189,43 @@ export const CATALOGUE: CatalogueCategory[] = [
       { label: "Heights", value: "4, 5, 6, 7, 8 ft" },
       { label: "Finish", value: "Natural, stained, or sealed" },
     ],
+    materials: {
+      label: "Materials & components",
+      sections: [
+        {
+          label: "Pickets",
+          items: [
+            { name: "Clear Cedar Picket", image: "/cedar-mat-clear-picket.png" },
+            { name: "Grade 1 Cedar Picket", image: "/cedar-mat-grade1-picket.png" },
+            { name: "Grade 2 Cedar Picket", image: "/cedar-mat-grade2-picket.png" },
+          ],
+        },
+        {
+          label: "Rails",
+          items: [
+            { name: "Cedar Rail", image: "/cedar-mat-cedar-rail.png" },
+            { name: "Pressure Treated Rail", image: "/cedar-mat-pt-rail.png" },
+          ],
+        },
+        {
+          label: "Post",
+          items: [
+            { name: "Pressure Treated Post on Pipe", image: "/cedar-mat-pt-post-pipe.png" },
+            { name: "Cedar Post on Pipe", image: "/cedar-mat-cedar-post-pipe.png" },
+            { name: "Cedar Post (Standard)", image: "/cedar-mat-cedar-post-std.png" },
+            { name: "Pressure Treated Post (Standard)", image: "/cedar-mat-pt-post-std.png" },
+          ],
+        },
+        {
+          label: "Post Cap",
+          items: [
+            { name: "Post Cap", image: "/cedar-mat-post-cap.png" },
+            { name: "Solar LED Post Cap", image: "/cedar-mat-solar-post-cap.png" },
+          ],
+        },
+        
+      ],
+    },
   },
   {
     slug: "vinyl-fences",
