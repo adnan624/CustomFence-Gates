@@ -14,16 +14,40 @@ export type Swatch = {
   image?: string;
 };
 
+/**
+ * One colour chip inside a palette tier.
+ * `image` uses a real swatch photo; `woodgrain` uses a synthetic textured fill;
+ * otherwise the flat `hex` is shown.
+ */
+export type PaletteSwatch = { name: string; hex: string; woodgrain?: boolean; image?: string };
+
+/** A palette tier, e.g. "Premium — Textured woodgrain". */
+export type PaletteTier = { tier: string; finish: string; swatches: PaletteSwatch[] };
+
+/** A named design profile within a style (e.g. Newbury, Folly, Hudson). */
+export type FenceProfile = {
+  name: string;
+  tagline: string;
+  /** Fence elevation illustration shown on the left of the profile page. */
+  image?: string;
+  panelWidth: string;
+  fenceHeight: string;
+  note?: string;
+  palette: PaletteTier[];
+};
+
 export type CatalogueStyle = {
   name: string;
-  blurb: string;
+  blurb?: string;
   /** Omit for a typographic "made to order" card (no photo). */
   image?: { src: string; alt: string };
-  specs: string[];
+  specs?: string[];
   /** Small corner badge, e.g. "Most requested". */
   tag?: string;
   /** Optional labelled face/pattern options (transparent cut-outs). */
   samples?: { label: string; items: MaterialItem[] };
+  /** Optional named profiles, each shown as its own showcase page. */
+  profiles?: FenceProfile[];
 };
 
 export type CatalogueImage = { src: string; alt: string };
@@ -242,7 +266,7 @@ export const CATALOGUE: CatalogueCategory[] = [
     ],
     styles: [
       {
-        name: "Privacy Vinyl Fence",
+        name: "Vertical Vinyl Fence",
         blurb:
           "Tongue-and-groove panels with no gaps — a seamless, bright-white wall of privacy.",
         image: {
@@ -251,6 +275,96 @@ export const CATALOGUE: CatalogueCategory[] = [
         },
         specs: ["Tongue-and-groove panels", "Full privacy", "6 ft standard"],
         tag: "Zero maintenance",
+        profiles: [
+          {
+            name: "Newbury",
+            tagline: "Solid vertical privacy",
+            image: "/vinyl-profile-newbury.png",
+            panelWidth: "6' or 8'",
+            fenceHeight: "4', 5', 6', 7'*",
+            note: "*7-ft height carries a restriction in the source catalog.",
+            palette: [
+              {
+                tier: "Premium",
+                finish: "Textured woodgrain",
+                swatches: [
+                  { name: "Weathered Blend", hex: "#6e5d4e", woodgrain: true, image: "/vinyl-swatch-weathered-blend.png" },
+                  { name: "Sierra Blend", hex: "#8a4b33", woodgrain: true, image: "/vinyl-swatch-sierra-blend.png" },
+                  { name: "Brazilian Blend", hex: "#4b3226", woodgrain: true, image: "/vinyl-swatch-brazilian-blend.png" },
+                  { name: "Arctic Blend", hex: "#3c3e41", woodgrain: true, image: "/vinyl-swatch-arctic-blend.png" },
+                ],
+              },
+              {
+                tier: "Select",
+                finish: "Smooth woodgrain",
+                swatches: [
+                  { name: "Weathered Aspen", hex: "#b7b1a4", woodgrain: true, image: "/vinyl-swatch-weathered-aspen.png" },
+                  { name: "Mesquite", hex: "#7c5942", woodgrain: true, image: "/vinyl-swatch-mesquite.png" },
+                  { name: "Coastal Cedar", hex: "#a9875f", woodgrain: true, image: "/vinyl-swatch-coastal-cedar.png" },
+                  { name: "Cypress", hex: "#9a6a33", woodgrain: true, image: "/vinyl-swatch-cypress.png" },
+                  { name: "Dark Walnut", hex: "#4a362a", woodgrain: true, image: "/vinyl-swatch-dark-walnut.png" },
+                  { name: "Dark Sequoia", hex: "#3a2a25", woodgrain: true, image: "/vinyl-swatch-dark-sequoia.png" },
+                ],
+              },
+              {
+                tier: "Standard",
+                finish: "Smooth solids",
+                swatches: [
+                  { name: "White", hex: "#f4f3ef" },
+                  { name: "Sand", hex: "#ddd0b6" },
+                  { name: "Clay", hex: "#a98d6e" },
+                  { name: "Gray", hex: "#9b948b" },
+                ],
+              },
+            ],
+          },
+          {
+            name: "Folly",
+            tagline: "3-inch vertical semi-private",
+            image: "/vinyl-profile-folly.svg",
+            panelWidth: "8'",
+            fenceHeight: "4', 5', 6'",
+            palette: [
+              {
+                tier: "Premium",
+                finish: "Textured woodgrain",
+                swatches: [
+                  { name: "Weathered Blend", hex: "#6e5d4e", woodgrain: true, image: "/vinyl-swatch-weathered-blend.png" },
+                  { name: "Sierra Blend", hex: "#8a4b33", woodgrain: true, image: "/vinyl-swatch-sierra-blend.png" },
+                  { name: "Brazilian Blend", hex: "#4b3226", woodgrain: true, image: "/vinyl-swatch-brazilian-blend.png" },
+                  { name: "Arctic Blend", hex: "#3c3e41", woodgrain: true, image: "/vinyl-swatch-arctic-blend.png" },
+                ],
+              },
+              {
+                tier: "Standard",
+                finish: "Smooth solids",
+                swatches: [
+                  { name: "White", hex: "#f4f3ef" },
+                  { name: "Sand", hex: "#ddd0b6" },
+                ],
+              },
+            ],
+          },
+          {
+            name: "Hudson",
+            tagline: "6-inch vertical semi-private",
+            image: "/vinyl-profile-hudson.svg",
+            panelWidth: "6' or 8'",
+            fenceHeight: "4', 5', 6'",
+            palette: [
+              {
+                tier: "Standard",
+                finish: "Smooth solids",
+                swatches: [
+                  { name: "White", hex: "#f4f3ef" },
+                  { name: "Sand", hex: "#ddd0b6" },
+                  { name: "Clay", hex: "#a98d6e" },
+                  { name: "Gray", hex: "#9b948b" },
+                ],
+              },
+            ],
+          },
+        ],
       },
       {
         name: "Lattice Top Vinyl Fence",
@@ -261,36 +375,62 @@ export const CATALOGUE: CatalogueCategory[] = [
           alt: "Vinyl privacy fence with a decorative lattice top and garden beds at dusk",
         },
         specs: ["Decorative lattice crown", "Added height", "Garden-friendly"],
-      },
-      {
-        name: "Vinyl Picket Fence",
-        blurb:
-          "Classic pickets scaled for front yards and garden borders, in fade-resistant white.",
-        image: {
-          src: "/vinyl-picket.jpg",
-          alt: "White vinyl picket fence along a front-yard garden",
-        },
-        specs: ["Straight picket top", "Garden scale", "Fade-resistant"],
-      },
-      {
-        name: "Shadow Box Vinyl Fence",
-        blurb:
-          "Alternating boards finish the fence the same on both sides and let air and light filter through.",
-        image: {
-          src: "/vinyl-shadowbox.jpg",
-          alt: "White vinyl shadow box fence finished the same on both sides",
-        },
-        specs: ["Finished both sides", "Alternating boards", "Semi-private"],
-      },
-      {
-        name: "Vinyl Ranch Rail Fence",
-        blurb:
-          "Open two- or three-rail vinyl for property lines and paddocks — a clean boundary that keeps the view.",
-        image: {
-          src: "/vinyl-ranch-rail.jpg",
-          alt: "White vinyl ranch rail fence running along a green lawn",
-        },
-        specs: ["2 – 3 open rails", "Property-line scale", "Open sightlines"],
+        profiles: [
+          {
+            name: "Tybee",
+            tagline: "Lattice-top privacy",
+            image: "/vinyl-profile-tybee.svg",
+            panelWidth: "6' or 8'",
+            fenceHeight: "5' or 6'",
+            palette: [
+              {
+                tier: "Select",
+                finish: "Smooth woodgrain",
+                swatches: [
+                  { name: "Cypress", hex: "#9a6a33", woodgrain: true, image: "/vinyl-swatch-cypress.png" },
+                ],
+              },
+              {
+                tier: "Standard",
+                finish: "Smooth solids",
+                swatches: [
+                  { name: "White", hex: "#f4f3ef" },
+                  { name: "Sand", hex: "#ddd0b6" },
+                  { name: "Clay", hex: "#a98d6e" },
+                ],
+              },
+            ],
+          },
+          {
+            name: "Chesapeake",
+            tagline: "Closed spindle-top privacy",
+            image: "/vinyl-profile-chesapeake.svg",
+            panelWidth: "6' or 8'",
+            fenceHeight: "5' or 6'",
+            palette: [
+              {
+                tier: "Premium",
+                finish: "Textured woodgrain",
+                swatches: [
+                  { name: "Weathered Blend", hex: "#6e5d4e", woodgrain: true, image: "/vinyl-swatch-weathered-blend.png" },
+                  { name: "Sierra Blend", hex: "#8a4b33", woodgrain: true, image: "/vinyl-swatch-sierra-blend.png" },
+                  { name: "Brazilian Blend", hex: "#4b3226", woodgrain: true, image: "/vinyl-swatch-brazilian-blend.png" },
+                  { name: "Arctic Blend", hex: "#3c3e41", woodgrain: true, image: "/vinyl-swatch-arctic-blend.png" },
+                ],
+              },
+              {
+                tier: "Standard",
+                finish: "Smooth solids",
+                swatches: [
+                  { name: "White", hex: "#f4f3ef" },
+                  { name: "Sand", hex: "#ddd0b6" },
+                  { name: "Clay", hex: "#a98d6e" },
+                  { name: "Gray", hex: "#9b948b" },
+                ],
+              },
+            ],
+          },
+        ],
       },
       {
         name: "Horizontal Vinyl Fence",
@@ -301,6 +441,231 @@ export const CATALOGUE: CatalogueCategory[] = [
           alt: "Modern horizontal vinyl fence with landscape lighting at dusk",
         },
         specs: ["Horizontal rails", "Modern profile", "Rinse-clean upkeep"],
+        profiles: [
+          {
+            name: "Madison",
+            tagline: "Solid horizontal privacy",
+            image: "/vinyl-profile-madison.svg",
+            panelWidth: "6' or 8'",
+            fenceHeight: "4', 5', 6'",
+            palette: [
+              {
+                tier: "Premium",
+                finish: "Textured woodgrain",
+                swatches: [
+                  { name: "Weathered Blend", hex: "#6e5d4e", woodgrain: true, image: "/vinyl-swatch-weathered-blend.png" },
+                  { name: "Sierra Blend", hex: "#8a4b33", woodgrain: true, image: "/vinyl-swatch-sierra-blend.png" },
+                  { name: "Brazilian Blend", hex: "#4b3226", woodgrain: true, image: "/vinyl-swatch-brazilian-blend.png" },
+                  { name: "Arctic Blend", hex: "#3c3e41", woodgrain: true, image: "/vinyl-swatch-arctic-blend.png" },
+                ],
+              },
+              {
+                tier: "Select",
+                finish: "Smooth woodgrain",
+                swatches: [
+                  { name: "Coastal Cedar", hex: "#a9875f", woodgrain: true, image: "/vinyl-swatch-coastal-cedar.png" },
+                  { name: "Cypress", hex: "#9a6a33", woodgrain: true, image: "/vinyl-swatch-cypress.png" },
+                ],
+              },
+              {
+                tier: "Standard",
+                finish: "Smooth solids",
+                swatches: [
+                  { name: "White", hex: "#f4f3ef" },
+                  { name: "Sand", hex: "#ddd0b6" },
+                  { name: "Clay", hex: "#a98d6e" },
+                  { name: "Gray", hex: "#9b948b" },
+                ],
+              },
+            ],
+          },
+          {
+            name: "Largo",
+            tagline: "Horizontal semi-private",
+            image: "/vinyl-profile-largo.svg",
+            panelWidth: "8'",
+            fenceHeight: "4', 5', 6'",
+            palette: [
+              {
+                tier: "Premium",
+                finish: "Textured woodgrain",
+                swatches: [
+                  { name: "Weathered Blend", hex: "#6e5d4e", woodgrain: true, image: "/vinyl-swatch-weathered-blend.png" },
+                  { name: "Sierra Blend", hex: "#8a4b33", woodgrain: true, image: "/vinyl-swatch-sierra-blend.png" },
+                  { name: "Brazilian Blend", hex: "#4b3226", woodgrain: true, image: "/vinyl-swatch-brazilian-blend.png" },
+                  { name: "Arctic Blend", hex: "#3c3e41", woodgrain: true, image: "/vinyl-swatch-arctic-blend.png" },
+                ],
+              },
+              {
+                tier: "Standard",
+                finish: "Smooth solids",
+                swatches: [
+                  { name: "White", hex: "#f4f3ef" },
+                  { name: "Sand", hex: "#ddd0b6" },
+                  { name: "Clay", hex: "#a98d6e" },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "Vinyl Picket Fence",
+        blurb:
+          "Classic pickets scaled for front yards and garden borders, in fade-resistant white.",
+        image: {
+          src: "/vinyl-picket.jpg",
+          alt: "White vinyl picket fence along a front-yard garden",
+        },
+        specs: ["Straight picket top", "Garden scale", "Fade-resistant"],
+        profiles: [
+          {
+            name: "Norwalk",
+            tagline: "Closed picket | 2-rail or 3-rail",
+            image: "/vinyl-profile-norwalk.svg",
+            panelWidth: "8'",
+            fenceHeight: "4', 5', 6'*",
+            note: '*Picket: 7/8" × 3". Premium: 4\', 5\', 6\'; Standard: 4\' only.',
+            palette: [
+              {
+                tier: "Premium",
+                finish: "Textured woodgrain",
+                swatches: [
+                  { name: "Weathered Blend", hex: "#6e5d4e", woodgrain: true, image: "/vinyl-swatch-weathered-blend.png" },
+                  { name: "Sierra Blend", hex: "#8a4b33", woodgrain: true, image: "/vinyl-swatch-sierra-blend.png" },
+                  { name: "Brazilian Blend", hex: "#4b3226", woodgrain: true, image: "/vinyl-swatch-brazilian-blend.png" },
+                  { name: "Arctic Blend", hex: "#3c3e41", woodgrain: true, image: "/vinyl-swatch-arctic-blend.png" },
+                ],
+              },
+              {
+                tier: "Standard",
+                finish: "Smooth solids",
+                swatches: [
+                  { name: "White", hex: "#f4f3ef" },
+                  { name: "Sand", hex: "#ddd0b6" },
+                ],
+              },
+            ],
+          },
+          {
+            name: "Cape Cod",
+            tagline: "Classic picket | Straight or scalloped",
+            image: "/vinyl-profile-cape-cod.svg",
+            panelWidth: "8'",
+            fenceHeight: "4', 5', 6'",
+            note: 'Picket: 7/8" × 1 1/2". Scalloped: White or Sand only.',
+            palette: [
+              {
+                tier: "Standard",
+                finish: "Smooth solids",
+                swatches: [
+                  { name: "White", hex: "#f4f3ef" },
+                  { name: "Sand", hex: "#ddd0b6" },
+                  { name: "Clay", hex: "#a98d6e" },
+                  { name: "Gray", hex: "#9b948b" },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "Shadow Box Vinyl Fence",
+        blurb:
+          "Alternating boards finish the fence the same on both sides and let air and light filter through.",
+        image: {
+          src: "/vinyl-shadowbox.jpg",
+          alt: "White vinyl shadow box fence finished the same on both sides",
+        },
+        specs: ["Finished both sides", "Alternating boards", "Semi-private"],
+        profiles: [
+          {
+            name: "Montauk",
+            tagline: "Board-on-board semi-private",
+            image: "/vinyl-profile-montauk.svg",
+            panelWidth: "6' or 8'",
+            fenceHeight: "4' or 6'",
+            palette: [
+              {
+                tier: "Standard",
+                finish: "Smooth solids",
+                swatches: [
+                  { name: "White", hex: "#f4f3ef" },
+                  { name: "Sand", hex: "#ddd0b6" },
+                  { name: "Clay", hex: "#a98d6e" },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "Vinyl Ranch Rail Fence",
+        blurb:
+          "Open two- or three-rail vinyl for property lines and paddocks — a clean boundary that keeps the view.",
+        image: {
+          src: "/vinyl-ranch-rail.jpg",
+          alt: "White vinyl ranch rail fence running along a green lawn",
+        },
+        specs: ["2 – 3 open rails", "Property-line scale", "Open sightlines"],
+        profiles: [
+          {
+            name: "Sierra",
+            tagline: "Diamond ranch rail",
+            image: "/vinyl-profile-sierra-ranch.svg",
+            panelWidth: "8'",
+            fenceHeight: "3' or 4'",
+            palette: [
+              {
+                tier: "Standard",
+                finish: "Smooth solids",
+                swatches: [{ name: "White", hex: "#f4f3ef" }],
+              },
+            ],
+          },
+          {
+            name: "Sedona",
+            tagline: "Crossbuck ranch rail",
+            image: "/vinyl-profile-sedona.svg",
+            panelWidth: "8'",
+            fenceHeight: "4'",
+            palette: [
+              {
+                tier: "Standard",
+                finish: "Smooth solids",
+                swatches: [{ name: "White", hex: "#f4f3ef" }],
+              },
+            ],
+          },
+          {
+            name: "Coronado",
+            tagline: "Ranch rail | 2-, 3- or 4-rail configurations",
+            image: "/vinyl-profile-coronado.svg",
+            panelWidth: "6' or 8'*",
+            fenceHeight: "3', 4' or 5'",
+            note: "*Coronado widths carry catalog markings; confirm applicability with supplier.",
+            palette: [
+              {
+                tier: "Premium",
+                finish: "Textured woodgrain",
+                swatches: [
+                  { name: "Weathered Blend", hex: "#6e5d4e", woodgrain: true, image: "/vinyl-swatch-weathered-blend.png" },
+                  { name: "Sierra Blend", hex: "#8a4b33", woodgrain: true, image: "/vinyl-swatch-sierra-blend.png" },
+                  { name: "Brazilian Blend", hex: "#4b3226", woodgrain: true, image: "/vinyl-swatch-brazilian-blend.png" },
+                  { name: "Arctic Blend", hex: "#3c3e41", woodgrain: true, image: "/vinyl-swatch-arctic-blend.png" },
+                ],
+              },
+              {
+                tier: "Standard",
+                finish: "Smooth solids",
+                swatches: [
+                  { name: "White", hex: "#f4f3ef" },
+                  { name: "Sand", hex: "#ddd0b6" },
+                ],
+              },
+            ],
+          },
+        ],
       },
     ],
     finishes: {

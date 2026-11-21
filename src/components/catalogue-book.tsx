@@ -385,10 +385,12 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
                 </div>
               )}
             </div>
-            <p className="mt-3 text-[11px] leading-relaxed text-[var(--color-muted)]">
-              {style.blurb}
-            </p>
-            {chipList(style.specs)}
+            {style.blurb ? (
+              <p className="mt-3 text-[11px] leading-relaxed text-[var(--color-muted)]">
+                {style.blurb}
+              </p>
+            ) : null}
+            {style.specs && style.specs.length > 0 ? chipList(style.specs) : null}
             {style.samples ? (
               <div className="mt-3">
                 <div className="flex items-center gap-2">
@@ -425,6 +427,160 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
         </div>,
         collection.eyebrow,
       );
+
+      // Named profiles: each gets a full elevation-image page on the LEFT
+      // (odd index) and its data + palette on the facing RIGHT page.
+      (style.profiles ?? []).forEach((profile, pi) => {
+        // Keep the image page on a left (odd) leaf. In a cover-first spread,
+        // odd indices sit on the left; bump parity with a blank leaf if needed.
+        if (pages.length % 2 === 0) {
+          push(
+            <div
+              key={`${collection.slug}-style-${si}-profile-${pi}-spacer`}
+              className="cf-page"
+              data-density="soft"
+            >
+              <div className="relative flex h-full flex-col p-7">
+                {pageFooter(collection.eyebrow)}
+              </div>
+            </div>,
+            collection.eyebrow,
+          );
+        }
+
+        // Left page — elevation illustration, large.
+        push(
+          <div
+            key={`${collection.slug}-style-${si}-profile-${pi}-img`}
+            className="cf-page"
+            data-density="soft"
+          >
+            <div className="relative flex h-full flex-col p-7">
+              <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+                {style.name}
+              </p>
+              <h3 className="font-[family-name:var(--font-display)] mt-1 text-2xl font-semibold uppercase tracking-tight text-[var(--color-ink)]">
+                {profile.name}
+              </h3>
+              <p className="mt-0.5 text-[11px] text-[var(--color-muted)]">{profile.tagline}</p>
+              {profile.image ? (
+                <div
+                  className="mt-4 min-h-0 w-full flex-1 rounded-xl bg-[#fcfbf8] ring-1 ring-[var(--color-border)]"
+                  style={{
+                    backgroundImage: `url("${profile.image}")`,
+                    backgroundSize: "contain",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                  role="img"
+                  aria-label={`${profile.name} elevation`}
+                />
+              ) : (
+                <div className="min-h-0 w-full flex-1" />
+              )}
+              {pageFooter(collection.eyebrow)}
+            </div>
+          </div>,
+          collection.eyebrow,
+        );
+
+        // Right page — design profile + colour palette.
+        // Scale swatches to the swatch count so dense profiles (e.g. Newbury,
+        // 14 swatches) still fit while sparse ones stay large.
+        const totalSwatches = profile.palette.reduce(
+          (n, g) => n + g.swatches.length,
+          0,
+        );
+        const swatchSize =
+          totalSwatches >= 12
+            ? { tile: "h-11 w-14", label: "w-14", groupGap: "gap-3", rowGap: "gap-y-2" }
+            : totalSwatches >= 7
+              ? { tile: "h-12 w-16", label: "w-16", groupGap: "gap-3.5", rowGap: "gap-y-2.5" }
+              : { tile: "h-14 w-16", label: "w-16", groupGap: "gap-4", rowGap: "gap-y-3" };
+        push(
+          <div
+            key={`${collection.slug}-style-${si}-profile-${pi}-data`}
+            className="cf-page"
+            data-density="soft"
+          >
+            <div className="relative flex h-full flex-col p-7">
+              <dl className="flex gap-6 border-b border-[var(--color-border)] pb-2.5">
+                <div>
+                  <dt className="text-[7px] font-semibold uppercase tracking-[0.15em] text-[var(--color-muted)]">
+                    Panel width
+                  </dt>
+                  <dd className="mt-0.5 text-[12px] font-semibold text-[var(--color-ink)]">
+                    {profile.panelWidth}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-[7px] font-semibold uppercase tracking-[0.15em] text-[var(--color-muted)]">
+                    Fence height
+                  </dt>
+                  <dd className="mt-0.5 text-[12px] font-semibold text-[var(--color-ink)]">
+                    {profile.fenceHeight}
+                  </dd>
+                </div>
+              </dl>
+              <p className="mt-4 text-[9px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+                Colour palette
+              </p>
+              <div
+                className={`mt-3 flex min-h-0 flex-1 flex-col overflow-hidden px-1 ${swatchSize.groupGap}`}
+              >
+                {profile.palette.map((group) => (
+                  <div key={group.tier}>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-ink)]">
+                        {group.tier}
+                      </span>
+                      <span className="text-[9px] text-[var(--color-muted)]">{group.finish}</span>
+                    </div>
+                    <div className={`mt-2.5 flex flex-wrap gap-x-3 ${swatchSize.rowGap}`}>
+                      {group.swatches.map((sw) => (
+                        <div key={sw.name} className="flex flex-col items-center gap-1.5">
+                          <span
+                            className={`${swatchSize.tile} overflow-hidden rounded-[4px] shadow-inner ring-1 ring-black/15`}
+                            style={
+                              sw.image
+                                ? {
+                                    backgroundColor: sw.hex,
+                                    backgroundImage: `url("${sw.image}")`,
+                                    backgroundSize: "cover",
+                                    backgroundPosition: "center",
+                                  }
+                                : sw.woodgrain
+                                  ? {
+                                      backgroundColor: sw.hex,
+                                      backgroundImage:
+                                        "repeating-linear-gradient(90deg, rgba(0,0,0,0.22) 0px, rgba(0,0,0,0.22) 0.5px, rgba(0,0,0,0) 0.5px, rgba(0,0,0,0) 2px, rgba(255,255,255,0.1) 2px, rgba(255,255,255,0.1) 2.5px, rgba(0,0,0,0) 2.5px, rgba(0,0,0,0) 5px), linear-gradient(90deg, rgba(255,255,255,0.16), rgba(0,0,0,0) 35%, rgba(0,0,0,0.2))",
+                                      backgroundBlendMode: "overlay, multiply",
+                                    }
+                                  : { backgroundColor: sw.hex }
+                            }
+                            aria-hidden
+                          />
+                          <span
+                            className={`${swatchSize.label} text-center text-[8px] font-medium leading-tight text-[var(--color-muted)]`}
+                          >
+                            {sw.name}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {profile.note ? (
+                <p className="mt-2 text-[7px] italic leading-snug text-[var(--color-muted)]">
+                  {profile.note}
+                </p>
+              ) : null}
+            </div>
+          </div>,
+          collection.eyebrow,
+        );
+      });
     });
 
     // Finishes & specifications (combined)
