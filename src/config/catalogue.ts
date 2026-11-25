@@ -33,6 +33,8 @@ export type FenceProfile = {
   panelWidth: string;
   fenceHeight: string;
   note?: string;
+  /** Per-profile availability note for the post-cap options. */
+  postCapNote?: string;
   palette: PaletteTier[];
 };
 
@@ -280,6 +282,8 @@ export const CATALOGUE: CatalogueCategory[] = [
             name: "Newbury",
             tagline: "Solid vertical privacy",
             image: "/vinyl-profile-newbury.png",
+            postCapNote:
+              "White/Sand: all 8 caps; Clay: all except Solar; Gray: Pyramid + New England. Select: Cypress/Coastal Cedar P-I-NE, Aspen/Mesquite P-NE, Dark Sequoia P-NE. Premium blends: P-NE.",
             panelWidth: "6' or 8'",
             fenceHeight: "4', 5', 6', 7'*",
             note: "*7-ft height carries a restriction in the source catalog.",
@@ -310,10 +314,10 @@ export const CATALOGUE: CatalogueCategory[] = [
                 tier: "Standard",
                 finish: "Smooth solids",
                 swatches: [
-                  { name: "White", hex: "#f4f3ef" },
-                  { name: "Sand", hex: "#ddd0b6" },
-                  { name: "Clay", hex: "#a98d6e" },
-                  { name: "Gray", hex: "#9b948b" },
+                  { name: "White", hex: "#f4f3ef", image: "/vinyl-swatch-white.png" },
+                  { name: "Sand", hex: "#ddd0b6", image: "/vinyl-swatch-sand.png" },
+                  { name: "Clay", hex: "#a98d6e", image: "/vinyl-swatch-clay.png" },
+                  { name: "Gray", hex: "#9b948b", image: "/vinyl-swatch-gray.png" },
                 ],
               },
             ],
@@ -321,7 +325,9 @@ export const CATALOGUE: CatalogueCategory[] = [
           {
             name: "Folly",
             tagline: "3-inch vertical semi-private",
-            image: "/vinyl-profile-folly.svg",
+            image: "/vinyl-profile-folly.png",
+            postCapNote:
+              "White and Sand: all 8 cap shapes. Premium blends: Pyramid + New England only.",
             panelWidth: "8'",
             fenceHeight: "4', 5', 6'",
             palette: [
@@ -339,8 +345,8 @@ export const CATALOGUE: CatalogueCategory[] = [
                 tier: "Standard",
                 finish: "Smooth solids",
                 swatches: [
-                  { name: "White", hex: "#f4f3ef" },
-                  { name: "Sand", hex: "#ddd0b6" },
+                  { name: "White", hex: "#f4f3ef", image: "/vinyl-swatch-white.png" },
+                  { name: "Sand", hex: "#ddd0b6", image: "/vinyl-swatch-sand.png" },
                 ],
               },
             ],
@@ -348,7 +354,9 @@ export const CATALOGUE: CatalogueCategory[] = [
           {
             name: "Hudson",
             tagline: "6-inch vertical semi-private",
-            image: "/vinyl-profile-hudson.svg",
+            image: "/vinyl-profile-hudson.png",
+            postCapNote:
+              "White: all 8 color-matched 5×5 cap styles. Verify the 6 ft × 8 ft Hudson post kit before ordering.",
             panelWidth: "6' or 8'",
             fenceHeight: "4', 5', 6'",
             palette: [
@@ -356,10 +364,10 @@ export const CATALOGUE: CatalogueCategory[] = [
                 tier: "Standard",
                 finish: "Smooth solids",
                 swatches: [
-                  { name: "White", hex: "#f4f3ef" },
-                  { name: "Sand", hex: "#ddd0b6" },
-                  { name: "Clay", hex: "#a98d6e" },
-                  { name: "Gray", hex: "#9b948b" },
+                  { name: "White", hex: "#f4f3ef", image: "/vinyl-swatch-white.png" },
+                  { name: "Sand", hex: "#ddd0b6", image: "/vinyl-swatch-sand.png" },
+                  { name: "Clay", hex: "#a98d6e", image: "/vinyl-swatch-clay.png" },
+                  { name: "Gray", hex: "#9b948b", image: "/vinyl-swatch-gray.png" },
                 ],
               },
             ],
@@ -379,7 +387,9 @@ export const CATALOGUE: CatalogueCategory[] = [
           {
             name: "Tybee",
             tagline: "Lattice-top privacy",
-            image: "/vinyl-profile-tybee.svg",
+            image: "/vinyl-profile-tybee.png",
+            postCapNote:
+              "White/Sand: all 8 shapes; Clay: all except Solar. Cypress: Pyramid, Internal, New England.",
             panelWidth: "6' or 8'",
             fenceHeight: "5' or 6'",
             palette: [
@@ -394,9 +404,9 @@ export const CATALOGUE: CatalogueCategory[] = [
                 tier: "Standard",
                 finish: "Smooth solids",
                 swatches: [
-                  { name: "White", hex: "#f4f3ef" },
-                  { name: "Sand", hex: "#ddd0b6" },
-                  { name: "Clay", hex: "#a98d6e" },
+                  { name: "White", hex: "#f4f3ef", image: "/vinyl-swatch-white.png" },
+                  { name: "Sand", hex: "#ddd0b6", image: "/vinyl-swatch-sand.png" },
+                  { name: "Clay", hex: "#a98d6e", image: "/vinyl-swatch-clay.png" },
                 ],
               },
             ],
@@ -404,7 +414,9 @@ export const CATALOGUE: CatalogueCategory[] = [
           {
             name: "Chesapeake",
             tagline: "Closed spindle-top privacy",
-            image: "/vinyl-profile-chesapeake.svg",
+            image: "/vinyl-profile-chesapeake.png",
+            postCapNote:
+              "White: all 8 color-matched 5×5 cap styles. Confirm post kit fit for the 6 ft × 8 ft Chesapeake panel.",
             panelWidth: "6' or 8'",
             fenceHeight: "5' or 6'",
             palette: [
@@ -422,10 +434,10 @@ export const CATALOGUE: CatalogueCategory[] = [
                 tier: "Standard",
                 finish: "Smooth solids",
                 swatches: [
-                  { name: "White", hex: "#f4f3ef" },
-                  { name: "Sand", hex: "#ddd0b6" },
-                  { name: "Clay", hex: "#a98d6e" },
-                  { name: "Gray", hex: "#9b948b" },
+                  { name: "White", hex: "#f4f3ef", image: "/vinyl-swatch-white.png" },
+                  { name: "Sand", hex: "#ddd0b6", image: "/vinyl-swatch-sand.png" },
+                  { name: "Clay", hex: "#a98d6e", image: "/vinyl-swatch-clay.png" },
+                  { name: "Gray", hex: "#9b948b", image: "/vinyl-swatch-gray.png" },
                 ],
               },
             ],
@@ -445,7 +457,9 @@ export const CATALOGUE: CatalogueCategory[] = [
           {
             name: "Madison",
             tagline: "Solid horizontal privacy",
-            image: "/vinyl-profile-madison.svg",
+            image: "/vinyl-profile-madison.png",
+            postCapNote:
+              "White/Sand: all 8; Clay: all except Solar; Gray: Pyramid + New England. Cypress/Coastal Cedar: P-I-NE; Premium blends: P-NE.",
             panelWidth: "6' or 8'",
             fenceHeight: "4', 5', 6'",
             palette: [
@@ -471,10 +485,10 @@ export const CATALOGUE: CatalogueCategory[] = [
                 tier: "Standard",
                 finish: "Smooth solids",
                 swatches: [
-                  { name: "White", hex: "#f4f3ef" },
-                  { name: "Sand", hex: "#ddd0b6" },
-                  { name: "Clay", hex: "#a98d6e" },
-                  { name: "Gray", hex: "#9b948b" },
+                  { name: "White", hex: "#f4f3ef", image: "/vinyl-swatch-white.png" },
+                  { name: "Sand", hex: "#ddd0b6", image: "/vinyl-swatch-sand.png" },
+                  { name: "Clay", hex: "#a98d6e", image: "/vinyl-swatch-clay.png" },
+                  { name: "Gray", hex: "#9b948b", image: "/vinyl-swatch-gray.png" },
                 ],
               },
             ],
@@ -482,7 +496,9 @@ export const CATALOGUE: CatalogueCategory[] = [
           {
             name: "Largo",
             tagline: "Horizontal semi-private",
-            image: "/vinyl-profile-largo.svg",
+            image: "/vinyl-profile-largo.png",
+            postCapNote:
+              "White/Sand: all 8 cap shapes; Clay: all except Solar. Premium blends: Pyramid + New England only.",
             panelWidth: "8'",
             fenceHeight: "4', 5', 6'",
             palette: [
@@ -500,9 +516,9 @@ export const CATALOGUE: CatalogueCategory[] = [
                 tier: "Standard",
                 finish: "Smooth solids",
                 swatches: [
-                  { name: "White", hex: "#f4f3ef" },
-                  { name: "Sand", hex: "#ddd0b6" },
-                  { name: "Clay", hex: "#a98d6e" },
+                  { name: "White", hex: "#f4f3ef", image: "/vinyl-swatch-white.png" },
+                  { name: "Sand", hex: "#ddd0b6", image: "/vinyl-swatch-sand.png" },
+                  { name: "Clay", hex: "#a98d6e", image: "/vinyl-swatch-clay.png" },
                 ],
               },
             ],
@@ -522,7 +538,9 @@ export const CATALOGUE: CatalogueCategory[] = [
           {
             name: "Norwalk",
             tagline: "Closed picket | 2-rail or 3-rail",
-            image: "/vinyl-profile-norwalk.svg",
+            image: "/vinyl-profile-norwalk.png",
+            postCapNote:
+              "White: all 8 color-matched 5×5 accessory cap styles. Check the chosen 2-rail/3-rail post before selection.",
             panelWidth: "8'",
             fenceHeight: "4', 5', 6'*",
             note: '*Picket: 7/8" × 3". Premium: 4\', 5\', 6\'; Standard: 4\' only.',
@@ -541,8 +559,8 @@ export const CATALOGUE: CatalogueCategory[] = [
                 tier: "Standard",
                 finish: "Smooth solids",
                 swatches: [
-                  { name: "White", hex: "#f4f3ef" },
-                  { name: "Sand", hex: "#ddd0b6" },
+                  { name: "White", hex: "#f4f3ef", image: "/vinyl-swatch-white.png" },
+                  { name: "Sand", hex: "#ddd0b6", image: "/vinyl-swatch-sand.png" },
                 ],
               },
             ],
@@ -550,7 +568,9 @@ export const CATALOGUE: CatalogueCategory[] = [
           {
             name: "Cape Cod",
             tagline: "Classic picket | Straight or scalloped",
-            image: "/vinyl-profile-cape-cod.svg",
+            image: "/vinyl-profile-cape-cod.png",
+            postCapNote:
+              "White: all 8 matching accessory cap shapes. Cape Cod panel SKU lists Pyramid, New England and Gothic; confirm the remaining shapes with the supplier.",
             panelWidth: "8'",
             fenceHeight: "4', 5', 6'",
             note: 'Picket: 7/8" × 1 1/2". Scalloped: White or Sand only.',
@@ -559,10 +579,10 @@ export const CATALOGUE: CatalogueCategory[] = [
                 tier: "Standard",
                 finish: "Smooth solids",
                 swatches: [
-                  { name: "White", hex: "#f4f3ef" },
-                  { name: "Sand", hex: "#ddd0b6" },
-                  { name: "Clay", hex: "#a98d6e" },
-                  { name: "Gray", hex: "#9b948b" },
+                  { name: "White", hex: "#f4f3ef", image: "/vinyl-swatch-white.png" },
+                  { name: "Sand", hex: "#ddd0b6", image: "/vinyl-swatch-sand.png" },
+                  { name: "Clay", hex: "#a98d6e", image: "/vinyl-swatch-clay.png" },
+                  { name: "Gray", hex: "#9b948b", image: "/vinyl-swatch-gray.png" },
                 ],
               },
             ],
@@ -582,7 +602,9 @@ export const CATALOGUE: CatalogueCategory[] = [
           {
             name: "Montauk",
             tagline: "Board-on-board semi-private",
-            image: "/vinyl-profile-montauk.svg",
+            image: "/vinyl-profile-montauk.png",
+            postCapNote:
+              "White: all 8 accessory cap styles. Montauk 6×6 panel SKU lists Pyramid, Internal and New England; confirm other cap choices for the selected panel kit.",
             panelWidth: "6' or 8'",
             fenceHeight: "4' or 6'",
             palette: [
@@ -590,9 +612,9 @@ export const CATALOGUE: CatalogueCategory[] = [
                 tier: "Standard",
                 finish: "Smooth solids",
                 swatches: [
-                  { name: "White", hex: "#f4f3ef" },
-                  { name: "Sand", hex: "#ddd0b6" },
-                  { name: "Clay", hex: "#a98d6e" },
+                  { name: "White", hex: "#f4f3ef", image: "/vinyl-swatch-white.png" },
+                  { name: "Sand", hex: "#ddd0b6", image: "/vinyl-swatch-sand.png" },
+                  { name: "Clay", hex: "#a98d6e", image: "/vinyl-swatch-clay.png" },
                 ],
               },
             ],
@@ -612,35 +634,41 @@ export const CATALOGUE: CatalogueCategory[] = [
           {
             name: "Sierra",
             tagline: "Diamond ranch rail",
-            image: "/vinyl-profile-sierra-ranch.svg",
+            image: "/vinyl-profile-sierra-ranch.png",
+            postCapNote:
+              "White: all 8 cap styles; confirm ranch post fit. Same 5×5 cap size for 2-rail / 3-rail sections.",
             panelWidth: "8'",
             fenceHeight: "3' or 4'",
             palette: [
               {
                 tier: "Standard",
                 finish: "Smooth solids",
-                swatches: [{ name: "White", hex: "#f4f3ef" }],
+                swatches: [{ name: "White", hex: "#f4f3ef", image: "/vinyl-swatch-white.png" }],
               },
             ],
           },
           {
             name: "Sedona",
             tagline: "Crossbuck ranch rail",
-            image: "/vinyl-profile-sedona.svg",
+            image: "/vinyl-profile-sedona.png",
+            postCapNote:
+              "White: all 8 cap styles; confirm crossbuck post fit.",
             panelWidth: "8'",
             fenceHeight: "4'",
             palette: [
               {
                 tier: "Standard",
                 finish: "Smooth solids",
-                swatches: [{ name: "White", hex: "#f4f3ef" }],
+                swatches: [{ name: "White", hex: "#f4f3ef", image: "/vinyl-swatch-white.png" }],
               },
             ],
           },
           {
             name: "Coronado",
             tagline: "Ranch rail | 2-, 3- or 4-rail configurations",
-            image: "/vinyl-profile-coronado.svg",
+            image: "/vinyl-profile-coronado.png",
+            postCapNote:
+              "White: all 8 cap shapes. Premium blends: Pyramid + New England. Verify compatibility with selected posts.",
             panelWidth: "6' or 8'*",
             fenceHeight: "3', 4' or 5'",
             note: "*Coronado widths carry catalog markings; confirm applicability with supplier.",
@@ -659,8 +687,8 @@ export const CATALOGUE: CatalogueCategory[] = [
                 tier: "Standard",
                 finish: "Smooth solids",
                 swatches: [
-                  { name: "White", hex: "#f4f3ef" },
-                  { name: "Sand", hex: "#ddd0b6" },
+                  { name: "White", hex: "#f4f3ef", image: "/vinyl-swatch-white.png" },
+                  { name: "Sand", hex: "#ddd0b6", image: "/vinyl-swatch-sand.png" },
                 ],
               },
             ],
@@ -671,7 +699,7 @@ export const CATALOGUE: CatalogueCategory[] = [
     finishes: {
       label: "Vinyl colours",
       swatches: [
-        { name: "White", hex: "#f4f3ef" },
+        { name: "White", hex: "#f4f3ef", image: "/vinyl-swatch-white.png" },
         { name: "Almond", hex: "#e8dcc3" },
         { name: "Khaki", hex: "#b8a98b" },
         { name: "Black", hex: "#23211f" },

@@ -428,119 +428,91 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
         collection.eyebrow,
       );
 
-      // Named profiles: each gets a full elevation-image page on the LEFT
-      // (odd index) and its data + palette on the facing RIGHT page.
+      // Each named profile is one page: elevation image on top, then the
+      // design profile and colour palette stacked below. Image and swatch
+      // sizes scale to the swatch count so dense profiles (e.g. Newbury,
+      // 14 swatches) still fit while sparse ones stay large.
       (style.profiles ?? []).forEach((profile, pi) => {
-        // Keep the image page on a left (odd) leaf. In a cover-first spread,
-        // odd indices sit on the left; bump parity with a blank leaf if needed.
-        if (pages.length % 2 === 0) {
-          push(
-            <div
-              key={`${collection.slug}-style-${si}-profile-${pi}-spacer`}
-              className="cf-page"
-              data-density="soft"
-            >
-              <div className="relative flex h-full flex-col p-7">
-                {pageFooter(collection.eyebrow)}
-              </div>
-            </div>,
-            collection.eyebrow,
-          );
-        }
-
-        // Left page — elevation illustration, large.
+        // One universal layout for every profile — sized to fit the densest
+        // page (Newbury, 14 swatches) so all pages look consistent.
+        const layout = {
+          title: "text-xl",
+          img: "h-24",
+          tile: "h-8 w-12",
+          label: "w-12",
+          groupGap: "gap-1.5",
+          rowGap: "gap-y-1",
+          rowGapX: "gap-x-2",
+        };
         push(
           <div
-            key={`${collection.slug}-style-${si}-profile-${pi}-img`}
+            key={`${collection.slug}-style-${si}-profile-${pi}`}
             className="cf-page"
             data-density="soft"
           >
             <div className="relative flex h-full flex-col p-7">
-              <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+              <h3 className={`font-[family-name:var(--font-display)] ${layout.title} font-semibold uppercase leading-tight tracking-tight text-[var(--color-ink)]`}>
                 {style.name}
-              </p>
-              <h3 className="font-[family-name:var(--font-display)] mt-1 text-2xl font-semibold uppercase tracking-tight text-[var(--color-ink)]">
-                {profile.name}
               </h3>
-              <p className="mt-0.5 text-[11px] text-[var(--color-muted)]">{profile.tagline}</p>
-              {profile.image ? (
-                <div
-                  className="mt-4 min-h-0 w-full flex-1 rounded-xl bg-[#fcfbf8] ring-1 ring-[var(--color-border)]"
-                  style={{
-                    backgroundImage: `url("${profile.image}")`,
-                    backgroundSize: "contain",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                  }}
-                  role="img"
-                  aria-label={`${profile.name} elevation`}
-                />
-              ) : (
-                <div className="min-h-0 w-full flex-1" />
-              )}
-              {pageFooter(collection.eyebrow)}
-            </div>
-          </div>,
-          collection.eyebrow,
-        );
-
-        // Right page — design profile + colour palette.
-        // Scale swatches to the swatch count so dense profiles (e.g. Newbury,
-        // 14 swatches) still fit while sparse ones stay large.
-        const totalSwatches = profile.palette.reduce(
-          (n, g) => n + g.swatches.length,
-          0,
-        );
-        const swatchSize =
-          totalSwatches >= 12
-            ? { tile: "h-11 w-14", label: "w-14", groupGap: "gap-3", rowGap: "gap-y-2" }
-            : totalSwatches >= 7
-              ? { tile: "h-12 w-16", label: "w-16", groupGap: "gap-3.5", rowGap: "gap-y-2.5" }
-              : { tile: "h-14 w-16", label: "w-16", groupGap: "gap-4", rowGap: "gap-y-3" };
-        push(
-          <div
-            key={`${collection.slug}-style-${si}-profile-${pi}-data`}
-            className="cf-page"
-            data-density="soft"
-          >
-            <div className="relative flex h-full flex-col p-7">
-              <dl className="flex gap-6 border-b border-[var(--color-border)] pb-2.5">
-                <div>
-                  <dt className="text-[7px] font-semibold uppercase tracking-[0.15em] text-[var(--color-muted)]">
-                    Panel width
-                  </dt>
-                  <dd className="mt-0.5 text-[12px] font-semibold text-[var(--color-ink)]">
-                    {profile.panelWidth}
-                  </dd>
+              <p className="mt-1 text-[11px] text-[var(--color-muted)]">{profile.tagline}</p>
+              <div className={`mt-3 flex w-full shrink-0 ${layout.img} gap-3`}>
+                {profile.image ? (
+                  <div
+                    className="h-full flex-1"
+                    style={{
+                      backgroundImage: `url("${profile.image}")`,
+                      backgroundSize: "contain",
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
+                    }}
+                    role="img"
+                    aria-label={`${profile.name} elevation`}
+                  />
+                ) : null}
+                <div className="flex h-full w-[44%] shrink-0 flex-col">
+                  <p className="flex items-baseline justify-between text-[8px] font-semibold uppercase tracking-[0.16em] text-[var(--color-gold)]">
+                    Post cap options
+                    <span className="text-[6.5px] tracking-[0.1em] text-[var(--color-muted)]">
+                      5×5 posts
+                    </span>
+                  </p>
+                  <div
+                    className="mt-1 min-h-0 w-full flex-1"
+                    style={{
+                      backgroundImage: 'url("/vinyl-postcaps.png")',
+                      backgroundSize: "contain",
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
+                    }}
+                    role="img"
+                    aria-label="Post cap options: Pyramid, Internal, New England, Gothic, Ball, Federation, Contemporary, Solar"
+                  />
                 </div>
-                <div>
-                  <dt className="text-[7px] font-semibold uppercase tracking-[0.15em] text-[var(--color-muted)]">
-                    Fence height
-                  </dt>
-                  <dd className="mt-0.5 text-[12px] font-semibold text-[var(--color-ink)]">
-                    {profile.fenceHeight}
-                  </dd>
-                </div>
-              </dl>
-              <p className="mt-4 text-[9px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+              </div>
+              {profile.postCapNote ? (
+                <p className="mt-1.5 shrink-0 text-[6.5px] leading-snug text-[var(--color-muted)]">
+                  {profile.postCapNote}
+                </p>
+              ) : null}
+              <p className="mt-2 shrink-0 text-[9px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
                 Colour palette
               </p>
               <div
-                className={`mt-3 flex min-h-0 flex-1 flex-col overflow-hidden px-1 ${swatchSize.groupGap}`}
+                className={`mt-2 flex min-h-0 flex-1 flex-col overflow-hidden px-1 ${layout.groupGap}`}
               >
                 {profile.palette.map((group) => (
                   <div key={group.tier}>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-ink)]">
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-ink)]">
                         {group.tier}
                       </span>
-                      <span className="text-[9px] text-[var(--color-muted)]">{group.finish}</span>
+                      <span className="text-[8px] text-[var(--color-muted)]">{group.finish}</span>
                     </div>
-                    <div className={`mt-2.5 flex flex-wrap gap-x-3 ${swatchSize.rowGap}`}>
+                    <div className={`mt-1.5 flex flex-wrap ${layout.rowGapX} ${layout.rowGap}`}>
                       {group.swatches.map((sw) => (
-                        <div key={sw.name} className="flex flex-col items-center gap-1.5">
+                        <div key={sw.name} className="flex flex-col items-center gap-1">
                           <span
-                            className={`${swatchSize.tile} overflow-hidden rounded-[4px] shadow-inner ring-1 ring-black/15`}
+                            className={`${layout.tile} overflow-hidden rounded-[4px] shadow-inner ring-1 ring-black/15`}
                             style={
                               sw.image
                                 ? {
@@ -561,7 +533,7 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
                             aria-hidden
                           />
                           <span
-                            className={`${swatchSize.label} text-center text-[8px] font-medium leading-tight text-[var(--color-muted)]`}
+                            className={`${layout.label} text-center text-[7px] font-medium leading-tight text-[var(--color-muted)]`}
                           >
                             {sw.name}
                           </span>
@@ -572,10 +544,18 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
                 ))}
               </div>
               {profile.note ? (
-                <p className="mt-2 text-[7px] italic leading-snug text-[var(--color-muted)]">
+                <p className="mt-1.5 shrink-0 text-[7px] italic leading-snug text-[var(--color-muted)]">
                   {profile.note}
                 </p>
               ) : null}
+              <p className="mt-1.5 shrink-0 border-t border-[var(--color-border)] pt-1.5 text-[7.5px] text-[var(--color-muted)]">
+                <span className="font-semibold uppercase tracking-[0.12em]">Panel width</span>{" "}
+                <span className="font-bold text-[var(--color-ink)]">{profile.panelWidth}</span>
+                <span className="mx-2 text-[var(--color-border)]">|</span>
+                <span className="font-semibold uppercase tracking-[0.12em]">Fence height</span>{" "}
+                <span className="font-bold text-[var(--color-ink)]">{profile.fenceHeight}</span>
+              </p>
+              {pageFooter(collection.eyebrow)}
             </div>
           </div>,
           collection.eyebrow,
