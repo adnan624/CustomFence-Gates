@@ -563,7 +563,9 @@ function buildBookPages(): { pages: ReactNode[]; chapters: string[] } {
       });
     });
 
-    // Finishes & specifications (combined)
+    // Finishes & specifications (combined) — skipped for vinyl, whose per-profile
+    // pages already show the full colour palettes.
+    if (collection.slug !== "vinyl-fences")
     push(
       <div key={`${collection.slug}-specs`} className="cf-page" data-density="soft">
         <div className="relative flex h-full flex-col p-7">
