@@ -634,7 +634,7 @@ export const CATALOGUE: CatalogueCategory[] = [
           {
             name: "Sierra",
             tagline: "Diamond ranch rail",
-            image: "/vinyl-profile-sierra-ranch.png",
+            image: "/vinyl-profile-coronado.png",
             postCapNote:
               "White: all 8 cap styles; confirm ranch post fit. Same 5×5 cap size for 2-rail / 3-rail sections.",
             panelWidth: "8'",
@@ -666,7 +666,7 @@ export const CATALOGUE: CatalogueCategory[] = [
           {
             name: "Coronado",
             tagline: "Ranch rail | 2-, 3- or 4-rail configurations",
-            image: "/vinyl-profile-coronado.png",
+            image: "/vinyl-profile-sierra-ranch.png",
             postCapNote:
               "White: all 8 cap shapes. Premium blends: Pyramid + New England. Verify compatibility with selected posts.",
             panelWidth: "6' or 8'*",
